@@ -53,7 +53,7 @@ nav a {
 }
 
 nav a:hover {
-  color: #67e8f9;
+  color: #e64fd9;
 }
 
 /*PARALLAX GENERAL*/
@@ -84,4 +84,99 @@ nav a:hover {
 .parallax > *{
     position: relative;
     z-index: 2;
+}
+
+.parallax-1{
+  background-image: 
+  url("../assets/images/Fondo14.png");
+}
+
+.parallax-2{
+  background-image: 
+  url("../assets/images/Fondo12.png");
+}
+
+.parallax-3{
+  background-image: 
+  url("../assets/images/Fondo13.png");
+}
+
+.parallax-4{
+  background-image: 
+  url("../assets/images/Fondo11.png");
+}
+
+.profile-img{
+  width: clamp(240px, 20vmin, 300px);
+  height: clamp(240px, 20vmin, 300px);
+object-fit: cover;
+border-radius: 50%;
+display: block;
+box-shadow: 0 10px 30px rgba(255, 0, 0, 0.18);
+}
+
+.glass {
+  background: rgba(20, 30, 50, 0.38);
+  color: white;
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 24px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+
+}
+
+.hero-card {
+  max-width: 900px;
+  padding: 45px;
+  display: flex;
+  align-items: center;
+  gap: 45px;
+  text-align: left;
+}
+
+.hero-text {
+  flex: 1;
+}
+
+.hero-text h1 {
+  margin-top: 0;
+  font-size: 42px;
+  color: white;
+}
+
+.hero-text p {
+  font-size: 18px;
+  color: white;
+}
+
+.hero-text blockquote {
+  margin: 25px 0;
+  font-style: italic;
+  color: white;
+}
+
+.profile-img {
+  width: 240px;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  flex-shrink: 0;
+  box-shadow: 0 10px 30px rgba(255, 0, 0, 0.18);
+}
+
+.boton {
+  display: inline-block;
+  padding: 12px 25px;
+  background: white;
+  color: #0f172a;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.boton:hover {
+  background: #e651de;
+  transform: translateY(-3px);
 }
