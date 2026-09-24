@@ -6,6 +6,7 @@
     <meta name="description" content="Mi perfil de estudiante">
     <title>Jesus Yahir Calderon Lopez @T.S.U en Desarrollo de Software Multiplataforma</title>
     <link id="mi-favicon" rel="icon" href="/Practica03/assets/images/futbol.png" type="image/png">
+    <link rel="stylesheet" href="/Practica03/css/styles.css" />
 </head>
 <body>
     <!--- ======================-->
@@ -13,17 +14,29 @@
      <!-- ======================-->
       <nav id="menu"> <!-- Estiqueta de semantica con el atributo id -->
         <ul>
-            <li>Inicio</li>
-            <li>Acerca de mi</li>
-            <li>Aspiraciones</li>
-            <li>Hobbies</li>
-            <li>Favoritos</li>
-            <li>Redes Sociales</li>
+            <li class="menu_option"><a href="#inicio">Inicio</a></li>
+        <li class="menu_option"><a href="#acerca-de-mi">Acerca de mí</a></li>
+        <li class="menu_option"><a href="#aspiraciones">Aspiraciones</a></li>
+        <li class="menu_option"><a href="#hobbies">Hobbies</a></li>
+        <li class="menu_option"><a href="#favoritos">Favoritos</a></li>
+        <li class="menu_option"><a href="#redes">Redes Sociales</a></li>
         </ul>
       </nav>
+      <header id="inicio" class="parallax parallax-1">
+        <div class="glass hero-card">
+            <img src="/Practica03/assets/images/Perfil.jpg" alt="Fotografia de perfil" class="perfil">
+            <h1>Hola, soy Jesus! 👍</h1>
+            <p> Estudiante | Apasionado por la tecnología | Soñador</p>
+            <blockquote>
+                "La disciplina del hoy, construye el éxito del mañana."
+            </blockquote>
+            <a href="acerca-de-mi" class="boton">Conóceme ↓</a>
+        </div>
+    </header>
       
-      <section>
-        <h2> 🥷 Acesrca de mi</h2>
+      <!-- Acerca de mí -->
+    <section id="acerca-de-mi">
+      <h2>👤 Acerca de mí</h2>
         <div><!-- Etiqueta de wstrctura que agrupa elementos-->
             <div>
                 <p>
