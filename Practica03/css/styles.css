@@ -70,6 +70,14 @@ nav a:hover {
   position: relative;
 }
 
+/* SOLO mueve el cuadro de inicio hacia la izquierda */
+.parallax-1 {
+  justify-content: flex-start;
+  padding-left: 5%;
+  background-image: url("../assets/images/Fondo14.png");
+}
+
+
 .parallax::before {
   content: "";
   position: absolute;
@@ -82,10 +90,12 @@ nav a:hover {
     z-index: 2;
 }
 
-.parallax-1{
-  background-image: 
-  url("../assets/images/Fondo14.png");
+.parallax-1 {
+  background-image: url("../assets/images/Fondo14.png");
+  justify-content: flex-start;
+  padding-left: 5%;
 }
+
 
 .parallax-2{
   background-image: 
@@ -207,7 +217,7 @@ box-shadow: 0 10px 30px rgba(255, 0, 0, 0.18);
 }
 
 .redes{
-  background: #f1f5f9;
+  background: #e290d0;
 }
 
 .contenedor{
@@ -252,13 +262,18 @@ gap: 20px;
 /*================================*/
 /*GRID*/
 /*================================*/
-.grid{
+#hobbies {
+  text-align: center;
+}
+
+.grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 25px;
   max-width: 1200px;
   margin: auto;
 }
+
 
 /*=============================*/
 /*IMAGENES*/
@@ -307,4 +322,8 @@ gap: 20px;
 .redes-sociales a:hover {
   transform: translateY(-8px) scale(1.05);
   background: linear-gradient(145deg, #2563eb, #7c3aed);
+}
+.cinco {
+  grid-template-columns: repeat(5,1fr);
+  
 }
