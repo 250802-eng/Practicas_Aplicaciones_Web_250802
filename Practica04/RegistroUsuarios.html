@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MecaGest: Formulario de Registro de Nuevos Usuarios - 250802</title>
+</head>
+<body>
+<header>
+    <h1> MecaGest </h1>
+    <h2>Registro de Nuevos Usuarios</h2>
+    <p> Complete los campos para solicitar una cuenta en el sistema.</p>
+
+</header>
+<main>
+    <form action="" method="">
+        <fieldset>
+            <legend>Datos personales</legend>
+        
+        <label for="nombre">Nombre: </label>
+        <input type="text" id="nombre" placeholder="Jesus" required>
+        <br>
+        <label for="apPaterno">Apellido Paterno: </label>
+        <input type="text" id="apPaterno" placeholder="Calderon" required>
+        <br>
+        <label for="apMaterno"> Apellido Materno: </label>
+        <input type="text" id="apMaterno" placeholder="Lopez" required>
+        <br>
+        <label for="genero">Genero: </label>
+        <select id="genero">
+            <option value="F">Femenino</option>
+            <option value="M">Masculino</option>
+            <option value="X">Prefiero no decirlo</option>
+        </select>
+        <br>
+        <label for="fechaNacimiento"> Fecha de Nacimiento: </label>
+        <input type="date" id="fechanacimiento">
+        <br>
+        </fieldset>
+        <fieldset>
+            <legend>Datos de contacto</legend>
+        <label for="email"> Correo Electronico:</label>
+        <input type="email" id="email" placeholder="250802@utxicotepec.edu.mx">
+        <br>
+        <label for="numTelefonico">Numero Telefonico</label>
+        <input type="tel" id="numTelefonico" placeholder="(55)123 456 78 90">
+        <br>
+        <label for="horarioContacto">Favor de contactar el horario</label>
+        <input type="hour" id="horarioContactoInicio" placeholder="09:00">
+        <input type="hour" id="horarioContactoFin" placeholder="18:00">
+        </fieldset>
+
+        <fieldset>
+            <legend>Datos de Acceso</legend>
+            <label for="usuario">Usuario: </label>
+            <input type="text" id="usuario" placeholder="JesusCalderon" required>
+            <br>
+            <label for="contrasena">Contraseña: </label>
+            <input type="password" id="contrasena" placeholder="*************" required>
+            <br>
+            <label for="confirmarContrasena">Confirmar Contraseña: </label>
+            <input type="password" id="confirmarContrasena" placeholder="*************" required>
+            
+        </fieldset>
+
+        <fieldset>
+                <legend>Datos de Ubicación</legend>
+                <label for="direccion">Dirección:</label>
+                <input type="text" id="direccion" name="direccion" placeholder="Calle , Número, Colonia, Ciudad" required>
+                <br>
+                <label for="pais">País:</label>
+                <input type="text" id="pais" name="pais" placeholder="País" required>
+                <br>
+                <label for="estado">Estado:</label>
+                <input type="text" id="estado" name="estado" placeholder="Estado" required>
+                <br>
+                <label for="ciudad">Ciudad:</label>
+                <input type="text" id="ciudad" name="ciudad" placeholder="Ciudad" required>
+                <br>
+                <label for="codigoPostal">Código Postal:</label>
+                <input type="text" id="codigoPostal" name="codigoPostal" placeholder="12345" required>
+            </fieldset>
+    </form>
+</main>    
+</body>
+</html>
