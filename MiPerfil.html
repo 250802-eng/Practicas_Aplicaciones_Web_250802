@@ -168,31 +168,59 @@
         </div>
       </section>
       
-        <section id="favoritos">
-    
-        <div>
-            <article>
-                <h3>Peliculas</h3>
-                <p>Spirit</p>
-            </article>
+        <section id="favoritos"
+             class="seccion solido-4">
 
-            <article>
-                <h3>Cancion favorita</h3>
-                <p>Jinetes en el cielo</p>
-            </article>
+        <h2>⭐ Mis favoritos</h2>
+        <p class="favoritos-intro">
+            Descubre mis historias y canciones favoritas. Selecciona una tarjeta para explorar su contenido</p>
 
-            <article>
-                <h3>Libro favorito</h3>
-                <p>el amor las mujeres y la vida</p>
-            </article>
+        <div class="carrusel" aria-label="Carrusel de Favoritos">
+            <button class="carrusel-flecha" id="anterior" type="button" aria-label="Favorito Anterior"> &#10094; </button>
+        <div class="carrusel-ventana">
+            <div class="carrusel-pista" id="pista">
+                <button class="favorito-card" type="button" data-tipo="video" data-src="Practica03/assets/media/Spirit_ El Corcel Indomable (2002) Tráiler.mp4"
+                data-titulo="🎬 Mi pelicula favorita: Spirit - El Corcel Indomable">
+                    <img src="/Practica03/assets/images/portada_pelicula.png" alt="Portada de Spirit - El corcel Indomable" loading="lazy">
+                    <span class="favorito-info"><strong>Spirit - El Corcel Indomable</strong><small>ver trailer MP4</small></span>
+                </button>
+                
+                <button class="favorito-card" type="button" data-tipo="audio" data-src="Practica03/assets/media/Banda Tierra Mojada - Jinetes del Cielo - Banda Tierra Mojada.mp3"
+                data-titulo=" 🎵 Mi cancion favorita">
+                    <img src="Practica03/assets/images/portada_album.png" alt="Portada de la canción favorita" loading="lazy">
+                    <span class="favorito-info"><strong>Mi cancion favorita: Jinetes del Cielo - Banda Tierra Mojada</strong><small> Escuchar MP3</small></span>
+                </button>
+
+                <button class="favorito-card" type="button" data-tipo="pdf" data-src="Practica03/assets/media/el_amor_las_mujeres_y_la_vida_-_mario_benedetti.pdf"
+                data-titulo=" 📚Mi libro favorito: La tregua - Mario Benedetti">
+                    <img src="/Practica03/assets/images/portada_libro.png" alt="Portada del libro favorito" loading="lazy">
+                    <span class="favorito-info"><strong>Mi libro favorito: La tregua - Mario </strong><small> Leer capitulo PDF</small></span>
+                </button>
             </div>
-             <!-- ============================= -->
+        </div>
+        <button class="carrusel-flecha" id="siguiente" type="button" aria-label="Favorito Siguiente"> &#10095; </button>
+        </div>
+        <div class="carrusel-indicadores" id="indicadores" aria-label="Seleccionar favorito"></div>
+    </section>
+
+    <!-- Modal para reproducción de multimedia -->
+    <div id="modal-favoritos" class="modal-favoritos" hidden>
+        <div class="modal-planel">
+            <div class="modal-cabecera">
+                <h2 id="modal-titulo">Título del recurso</h2>
+                <button id="cerrar-modal" class="modal-cerrar" aria-label="Cerrar modal">&times;</button>
+            </div>
+            <div id="modal-contenido" class="modal-contenido"></div>
+        </div>
+    </div>
+
+    <!-- ============================= -->
     <!-- REDES SOCIALES -->
     <!-- ============================= -->
 
     <section id="redes" class="seccion redes">
 
-        <h2>ð Mis redes sociales</h2>
+        <h2>    🌐 Mis redes sociales</h2>
 
         <p>
             Puedes encontrarme en:
@@ -334,31 +362,23 @@
             </a>
 
 
-            <a href="https://www.youtube.com/"
-               target="_blank"
-               aria-label="YouTube">
+            <a href="https://www.youtube.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTube">
 
-                <svg viewBox="0 0 24 24">
-
-                    <path fill="currentColor"
-                          d="M21 7.5
-                          c-.2-1.4-1.2-2.5-2.6-2.7
-                          C16.4 4.5 12 4.5 12 4.5
-                          s-4.4 0-6.4.3
-                          C4.2 5 3.2 6.1 3 7.5
-                          2.7 9 2.7 12 2.7 12
-                          s0 3 .3 4.5
-                          c.2 1.4 1.2 2.5 2.6 2.7
-                          2 .3 6.4.3 6.4.3
-                          s4.4 0 6.4-.3
-                          c1.4-.2 2.4-1.3 2.6-2.7
-                          .3-1.5.3-4.5.3-4.5
-                          s0-3-.3-4.5z"/>
-
-                    <polygon points="10,9 16,12 10,15"
-                             fill="white"/>
-
-                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="120" height="85">
+                <defs>
+                    <mask id="yt-cutout">
+                        <!-- Fondo blanco para mostrar el logo -->
+                        <rect x="0" y="0" width="576" height="512" fill="#FFFFFF" />
+                        <!-- Triángulo negro para hacer transparente la parte central -->
+                            <path d="M232 337.521V174.479L374.821 256 232 337.521z" fill="#000000" />
+                    </mask>
+                </defs>
+                <!-- Cuerpo del logo en color blanco con el recorte aplicado -->
+            <path fill="#FFFFFF" mask="url(#yt-cutout)" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305z"/>
+            </svg>
 
                 <span>YouTube</span>
 
@@ -368,6 +388,6 @@
 
     </section>
     
-
+    <script src="Practica03/js/app.js"></script>
 </body>
 </html>
