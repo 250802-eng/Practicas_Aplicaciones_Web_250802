@@ -1,0 +1,24 @@
+{
+  "name": "practicas_aplicaciones_web_250802",
+  "version": "1.0.0",
+  "description": "---",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "npx gh-pages -d ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/250802-eng/Practicas_Aplicaciones_Web_250802.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/250802-eng/Practicas_Aplicaciones_Web_250802/issues"
+  },
+  "homepage": "https://github.com/250802-eng/Practicas_Aplicaciones_Web_250802#readme",
+  "dependencies": {
+    "gh-pages": "^6.1.1"
+  }
+}
