@@ -3,84 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MecaGest: Formulario de Registro de Nuevos Usuarios - 250802</title>
+    <title>MecaGest: Formulario de Registro de Nuevos Usuarios - 251113</title>
 </head>
 <body>
 <header>
     <h1> MecaGest </h1>
-    <h2>Registro de Nuevos Usuarios</h2>
-    <p> Complete los campos para solicitar una cuenta en el sistema.</p>
-
+    <h2> Registro de Nuevos Usuarios </h2>
+    <p> Complete los campos para solicitar una cuenta en el sistema. </p>
 </header>
 <main>
     <form action="" method="">
         <fieldset>
-            <legend>Datos personales</legend>
-        
+            <legend> Datos Personales</legend>
+            <label for="tituloCortesia">Título de Cortesía: </label>
+            <select id="tituloCortesia">
+                <option>Sr.</option>
+                <option>Sra.</option>
+                <option>Srita.</option>
+                <option>Ing.</option>
+                <option>Dr</option>
+                <option>Mtro.</option>
+                <option>Ninguno</option>
+            </select>
+        <br>
         <label for="nombre">Nombre: </label>
         <input type="text" id="nombre" placeholder="Jesus" required>
         <br>
         <label for="apPaterno">Apellido Paterno: </label>
         <input type="text" id="apPaterno" placeholder="Calderon" required>
         <br>
-        <label for="apMaterno"> Apellido Materno: </label>
-        <input type="text" id="apMaterno" placeholder="Lopez" required>
+        <label for="apMaterno">Apellido Materno: </label>
+        <input type="text" id="apMaterno" placeholder="Lopez">
         <br>
-        <label for="genero">Genero: </label>
+        <label for="genero">Género: </label>
         <select id="genero">
             <option value="F">Femenino</option>
             <option value="M">Masculino</option>
             <option value="X">Prefiero no decirlo</option>
         </select>
         <br>
-        <label for="fechaNacimiento"> Fecha de Nacimiento: </label>
-        <input type="date" id="fechanacimiento">
+        <label for="fechaNacimiento">Fecha de Nacimiento: </label>
+        <input type="date" id="fechaNacimiento">
         <br>
         </fieldset>
+
         <fieldset>
-            <legend>Datos de contacto</legend>
-        <label for="email"> Correo Electronico:</label>
+        <legend>Datos de Contacto</legend>
+        <label for="email">Correo Electrónico: </label>
         <input type="email" id="email" placeholder="250802@utxicotepec.edu.mx">
         <br>
-        <label for="numTelefonico">Numero Telefonico</label>
+        <label for="numTelefonico">Número Telefónico: </label>
         <input type="tel" id="numTelefonico" placeholder="(55)123 456 78 90">
         <br>
-        <label for="horarioContacto">Favor de contactar el horario</label>
-        <input type="hour" id="horarioContactoInicio" placeholder="09:00">
-        <input type="hour" id="horarioContactoFin" placeholder="18:00">
+        <label for="horarioContacto">Favor de contactar en el horario: </label>
+        <input type="time" id="horarioContactoInicio" placeholder="09:00"> a
+        <input type="time" id="horarioContactoFin" placeholder="18:00">
         </fieldset>
 
         <fieldset>
-            <legend>Datos de Acceso</legend>
-            <label for="usuario">Usuario: </label>
-            <input type="text" id="usuario" placeholder="JesusCalderon" required>
-            <br>
-            <label for="contrasena">Contraseña: </label>
-            <input type="password" id="contrasena" placeholder="*************" required>
-            <br>
-            <label for="confirmarContrasena">Confirmar Contraseña: </label>
-            <input type="password" id="confirmarContrasena" placeholder="*************" required>
-            
+        <legend>Datos de Acceso</legend>
+        <label for="usuario">Usuario: </label>
+        <input type="text" id="usuario" placeholder="jesuscalderon" required>
+        <br>
+        <label for="contrasena">Contraseña: </label>
+        <input type="password" id="contrasena" placeholder="**********" required>
+        <br>
+        <label for="confirmarContrasena">Confirmar contraseña: </label>
+        <input type="password" id="confirmarContrasena" placeholder="**********" required>
         </fieldset>
 
         <fieldset>
-                <legend>Datos de Ubicación</legend>
-                <label for="direccion">Dirección:</label>
-                <input type="text" id="direccion" name="direccion" placeholder="Calle , Número, Colonia, Ciudad" required>
+        <legend>Datos de Ubicación</legend>
+        <label for="direccion">Dirección: </label>
+        <input type="text" id="direccion" placeholder="Calle, Número, Colonia, Ciudad, Estado, Código Postal">
+        <br>
+        <label for="pais">País: </label>
+        <input type="text" id="pais" placeholder="México">
+        <br>
+        <label for="estado">Estado: </label>
+        <input type="text" id="estado" placeholder="Ciudad de México">
+        <br>
+        <label for="ciudad">Ciudad: </label>
+        <input type="text" id="ciudad" placeholder="Ciudad de México">
+        <br>
+        <label for="codigoPostal">Código Postal: </label>
+        <input type="text" id="codigoPostal" placeholder="01234">
+        </fieldset>
+        <br>
+        <input type="checkbox" id="validado"> Acepto los términos y condiciones del uso de la plataforma MecaGest.
+        <br><br>
+        <input type="submit" value="Enviar Solicitud" disabled>
+        <input type="reset" value="Limpiar Formulario">
+    </form>
+
+    <br><br>
+
+    <form><!-- Formulario input que usaremos más adelante -->
+        <fieldset>
+            <legend>Visualización de Citas por Mes: </legend>
+            <label for="mesCitas">Por favor, elige el mes:  </label>
+            <input type="month">
+            <button id="verCitas">Ver Citas</button>
+            <br>
+            <h4>Las citas programadas para el mes elegido son: </h4>
+            <br>
+            <table style="border: 1px solid black">
+                    <tr>
+                        <th style="border: 1px solid black">No.</th>
+                        <th style="border: 1px solid black">Nombre</th>
+                        <th style="border: 1px solid black">Descripción</th>
+                        <th style="border: 1px solid black">Fecha Programada</th>
+                        <th style="border: 1px solid black">Estatus Actual</th>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid black">1.</td>
+                        <td style="border: 1px solid black">Cita de entrega de unidad reparada con el cliente: Mauricio Mejía, Unidad: Volkswagen, Jetta 2020 </td>
+                        <td style="border: 1px solid black">Se realizó un cambio de bujías, la unidad está lista para entrega. </td>
+                        <td style="border: 1px solid black">10 de Octubre de 2026</td>
+                        <td style="border: 1px solid black">Atendida</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid black">2.</td>
+                        <td style="border: 1px solid black">Cita de valoración con el cliente: Jesus Calderon L., Unidad: Renault, Duster 2022 </td>
+                        <td style="border: 1px solid black">El cliente solicita una revisión del cuerpo de aceleración de la unidad para posible mantenimiento correctivo. </td>
+                        <td style="border: 1px solid black">16 de Octubre de 2026</td>
+                        <td style="border: 1px solid black">Programada</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid black">3.</td>
+                        <td style="border: 1px solid black">Cita de valoración con el cliente: Mauricio Mejía, Unidad: Volkswagen, Jetta 2020 </td>
+                        <td style="border: 1px solid black">A la unidad se le hicieron cambio de bujías, pero el cliente reporta un sonido extraño. </td>
+                        <td style="border: 1px solid black">17 de Octubre de 2026</td>
+                        <td style="border: 1px solid black">Programada</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid black">4.</td>
+                        <td style="border: 1px solid black">Cita de valoración con la cliente: Alejandra Romero, Unidad: Toyota, Hilux 2012 </td>
+                        <td style="border: 1px solid black">El cliente solicita una revisión del cuerpo de aceleración de la unidad para posible mantenimiento correctivo. </td>
+                        <td style="border: 1px solid black">16 de Octubre de 2026</td>
+                        <td style="border: 1px solid black">Cancelada</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid black">5.</td>
+                        <td style="border: 1px solid black">Cita de valoración con la cliente: Alejandra Romero, Unidad: Toyota, Hilux 2012 </td>
+                        <td style="border: 1px solid black">El cliente solicita una revisión del cuerpo de aceleración de la unidad para posible mantenimiento correctivo. </td>
+                        <td style="border: 1px solid black">20 de Octubre de 2026</td>
+                        <td style="border: 1px solid black">Reprogramada</td>
+                    </tr>
+                </table>
+            </fieldset>
+            <fieldset>
+                <legend>Configuraciones de la Interfaz: </legend>
+                <label for="fontColor">Color de la fuente</label>
+                <input type="color" id="fontColor">
                 <br>
-                <label for="pais">País:</label>
-                <input type="text" id="pais" name="pais" placeholder="País" required>
+                <label for="backgroundColor">Color de Fondo </label>
+                <input type="color" id="background" value="#CCC">
+            </fieldset>
+            <fieldset>
+                <legend>Configuraciones de Mi Cuenta/Perfil: </legend>
+                <label for="userPhoto">Foto de perfil: </label>
+                <input type="file" id="userPhoto" accept="image/*">
+                <input type="image" id="buttonNext" src="assets/images/siguiente.png" alt="Siguiente">
                 <br>
-                <label for="estado">Estado:</label>
-                <input type="text" id="estado" name="estado" placeholder="Estado" required>
+                <input type="image" id="userId" value="25XXXX">
+            </fieldset>
+
+            <fieldset>
+                <legend>Datos Fiscales: </legend>
+                <label for="rfc">Registro Federal de Causantes (RFC): </label>
+                <input type="text" id="rfc" maxlength="13" placeholder="RAHMXXXXXX">
                 <br>
-                <label for="ciudad">Ciudad:</label>
-                <input type="text" id="ciudad" name="ciudad" placeholder="Ciudad" required>
-                <br>
-                <label for="codigoPostal">Código Postal:</label>
-                <input type="text" id="codigoPostal" name="codigoPostal" placeholder="12345" required>
+                <label for="fisicalSituacion">Constancia de Sitiucion Fiscal:</label>
+                <input type="file" id="fisicalSituacion" accept=".pdf">
+                <input type="hidden" id="userdId" value="25XXXX">
+            </fieldset>
+
+            <fieldset>
+                <legend>Solicitud de Cita: </legend>
+                <label for=""></label>
             </fieldset>
     </form>
-</main>    
+</main>
 </body>
 </html>
