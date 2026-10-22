@@ -1,0 +1,334 @@
+/* ==========================================================================
+   MecaGest - Design System (Profesional)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+    --primary: #0f172a;          /* Slate 900 */
+    --primary-accent: #2563eb;   /* Blue 600 */
+    --primary-hover: #1d4ed8;    /* Blue 700 */
+    --bg-main: #f8fafc;          /* Slate 50 */
+    --surface: #ffffff;          /* White */
+    --text-main: #1e293b;        /* Slate 800 */
+    --text-muted: #64748b;       /* Slate 500 */
+    --border: #e2e8f0;           /* Slate 200 */
+    --border-focus: #93c5fd;     /* Blue 300 */
+    --radius: 12px;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    line-height: 1.5;
+    padding: 2.5rem 1rem;
+}
+
+main {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+/* --- Banner Superior / Header --- */
+header {
+    background: linear-gradient(135deg, var(--primary) 0%, #1e293b 100%);
+    color: white;
+    padding: 3rem 2rem;
+    border-radius: var(--radius);
+    max-width: 960px;
+    margin: 0 auto 2rem auto;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+header::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 300px;
+    height: 300px;
+    background: rgba(37, 99, 235, 0.15);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+header h1 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: #ffffff;
+    margin-bottom: 0.25rem;
+}
+
+header h2 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #94a3b8;
+    margin-bottom: 0.75rem;
+}
+
+header p {
+    font-size: 0.95rem;
+    color: #cbd5e1;
+}
+
+/* --- Secciones en Tarjeta (Fieldsets) --- */
+fieldset {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    margin-bottom: 1.75rem;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    
+    /* Layout automático en grid para distribución profesional */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem 1.5rem;
+}
+
+fieldset:hover {
+    box-shadow: var(--shadow-md);
+    border-color: #cbd5e1;
+}
+
+legend {
+    grid-column: 1 / -1;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--primary);
+    padding: 0.25rem 0.75rem;
+    background-color: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+}
+
+/* Redimensionar elementos dentro del Fieldset para que ocupen toda su columna */
+fieldset > label,
+fieldset > input,
+fieldset > select,
+fieldset > textarea,
+fieldset > table {
+    grid-column: span 1;
+}
+
+/* Hacer que ciertos elementos abarquen las 2 columnas */
+fieldset > label[for="direccion"],
+fieldset > input#direccion,
+fieldset > label[for="descripcionText"],
+fieldset > textarea#descripcionText,
+fieldset > table,
+fieldset > h4,
+fieldset > label:has(input[type="radio"]) {
+    grid-column: 1 / -1;
+}
+
+/* --- Formulario, Inputs y Selects --- */
+label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: #334155;
+    margin-bottom: 0.35rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+input[type="date"],
+input[type="time"],
+input[type="month"],
+input[type="datetime-local"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 0.65rem 0.85rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.925rem;
+    font-family: inherit;
+    color: var(--text-main);
+    background-color: #f8fafc;
+    transition: var(--transition);
+    outline: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    background-color: #ffffff;
+    border-color: var(--primary-accent);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 90px;
+}
+
+/* Configuración especial de botones e inputs file */
+input[type="file"] {
+    padding: 0.5rem;
+    background-color: #ffffff;
+}
+
+input[type="color"] {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    width: 60px;
+    height: 38px;
+    cursor: pointer;
+    background: transparent;
+}
+
+/* --- Botones --- */
+button,
+input[type="submit"],
+input[type="reset"] {
+    font-family: inherit;
+    font-size: 0.925rem;
+    font-weight: 600;
+    padding: 0.75rem 1.75rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+input[type="submit"], 
+button#verCitas, 
+button#requestTool {
+    background-color: var(--primary-accent);
+    color: white;
+    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+}
+
+input[type="submit"]:hover, 
+button#verCitas:hover, 
+button#requestTool:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+}
+
+input[type="reset"] {
+    background-color: #f1f5f9;
+    color: #475569;
+    border: 1px solid var(--border);
+}
+
+input[type="reset"]:hover {
+    background-color: #e2e8f0;
+    color: var(--text-main);
+}
+
+/* --- Tablas Dashboard --- */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 1rem;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 0.875rem;
+}
+
+caption {
+    font-weight: 600;
+    text-align: left;
+    margin-bottom: 0.75rem;
+    color: var(--primary);
+}
+
+th {
+    background-color: #f1f5f9;
+    color: #334155;
+    font-weight: 600;
+    text-align: left;
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--border);
+}
+
+td {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--border);
+    color: #475569;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+/* Estilo para los títulos descriptivos */
+h4 {
+    margin: 2rem 0 1rem 0;
+    color: var(--primary);
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+/* --- Responsive (Móvil) --- */
+@media (max-width: 640px) {
+    fieldset {
+        grid-template-columns: 1fr;
+        padding: 1.25rem;
+    }
+
+    header {
+        padding: 2rem 1.25rem;
+    }
+
+    button, input[type="submit"], input[type="reset"] {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+}/* --- Corrección para el Control de Rango / Volumen --- */
+input[type="range"] {
+    width: 100%;
+    height: 6px;
+    padding: 0;
+    background: var(--border);
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--primary-accent);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+    background: var(--primary-hover);
+}
