@@ -332,3 +332,10 @@ input[type="range"]::-webkit-slider-thumb:hover {
     transform: scale(1.15);
     background: var(--primary-hover);
 }
+#resultadoEdad {
+    grid-column: 2;
+    margin-top: -15px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    font-weight: bold;
+}
