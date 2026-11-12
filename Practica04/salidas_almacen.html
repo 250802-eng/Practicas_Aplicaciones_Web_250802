@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MecaGest | Salidas de almacén</title>
+    <!-- Si tu CSS está en una carpeta, cámbialo a href="css/styles.css" -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="main-wrapper">
+        <main class="content-area">
+            <!-- ENCABEZADO AZUL -->
+            <header class="top-banner">
+                <div class="banner-info">
+                    <h1>Salidas de almacén</h1>
+                    <p>Solicitud de herramientas y refacciones asociadas a órdenes de servicio: datos de práctica.</p>
+                    <div class="tech-badges">
+                        <span class="tech-badge">HTML5 semántico</span>
+                        <span class="tech-badge">CSS puro</span>
+                        <span class="tech-badge">JavaScript - Práctica 05</span>
+                    </div>
+                </div>
+                <div class="logo-box">
+                    <i class="fa-solid fa-van-shuttle"></i>
+                    <span>SGTM</span>
+                </div>
+            </header>
+
+            <!-- BARRA DE NAVEGACIÓN -->
+            <nav class="nav-bar">
+                <a href="RegistroUsuarios.html" class="nav-pill"><i class="fa-regular fa-user"></i> Registro de usuarios</a>
+                <a href="proximas_citas.html" class="nav-pill"><i class="fa-regular fa-calendar-check"></i> Próximas citas</a>
+                <a href="configuracion.html" class="nav-pill"><i class="fa-solid fa-gear"></i> Configuración</a>
+                <a href="salidas_almacen.html" class="nav-pill active"><i class="fa-solid fa-wrench"></i> Salidas de almacén</a>
+            </nav>
+
+            <!-- CONTENEDOR PRINCIPAL -->
+            <div class="wizard-card">
+                <div class="module-header">
+                    <div class="module-title-group">
+                        <span class="module-num">01</span>
+                        <div>
+                            <span class="paso-tag">MÓDULOS DE PRÁCTICA · MECAGEST</span>
+                            <h2>Salidas de almacén</h2>
+                            <p class="step-subtitle" style="margin-bottom:0;">Solicitud de herramientas y refacciones asociadas a órdenes de servicio.</p>
+                        </div>
+                    </div>
+                    <span class="paso-tag" style="color:#64748b;">HTML + CSS + JS</span>
+                </div>
+
+                <!-- SECCIÓN 10: FORMULARIO DE SOLICITUD -->
+                <div class="practice-card">
+                    <span class="card-num">10</span>
+                    <h4>Solicitud de herramientas y refacciones</h4>
+                    
+                    <div class="almacen-grid">
+                        <div class="field-group">
+                            <span class="field-label">Categoría de recurso</span>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="catRecurso" value="Refacción" checked> Refacción
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="catRecurso" value="Herramienta"> Herramienta
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label" for="selectRecurso">Elige la pieza o herramienta</label>
+                            <div class="input-with-icon">
+                                <select id="selectRecurso" class="input-underline">
+                                    <option value="">Selecciona un recurso</option>
+                                    <optgroup label="Piezas de motor">
+                                        <option value="Bujía">Bujía</option>
+                                        <option value="Filtro de aceite">Filtro de aceite</option>
+                                        <option value="Banda de distribución">Banda de distribución</option>
+                                    </optgroup>
+                                    <optgroup label="Piezas de transmisión">
+                                        <option value="Disco de embrague">Disco de embrague</option>
+                                        <option value="Collarín de embrague">Collarín de embrague</option>
+                                        <option value="Junta homocinética">Junta homocinética</option>
+                                        <option value="Semieje de transmisión">Semieje de transmisión</option>
+                                    </optgroup>
+                                    <optgroup label="Piezas de suspensión">
+                                        <option value="Amortiguador">Amortiguador</option>
+                                        <option value="Rótula de suspensión">Rótula de suspensión</option>
+                                    </optgroup>
+                                    <optgroup label="Llaves y herramientas especializadas">
+                                        <option value="Llave combinada">Llave combinada</option>
+                                        <option value="Llave Torx">Llave Torx</option>
+                                        <option value="Llave dinamométrica">Llave dinamométrica</option>
+                                        <option value="Extractor de poleas">Extractor de poleas</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label" for="cantRecurso">Cantidad</label>
+                            <div class="input-with-icon">
+                                <span>#</span>
+                                <input type="number" id="cantRecurso" value="1" min="1" class="input-underline">
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn-blue" onclick="agregarRecurso()">Solicitar herramienta</button>
+                    </div>
+                </div>
+
+                <!-- TABLA DE HERRAMIENTAS SOLICITADAS -->
+                <div style="margin-top: 28px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <div>
+                            <h3>Herramientas para la orden de servicio</h3>
+                            <p class="step-subtitle" style="margin-bottom:0;">Inventario de ejemplo sin conexión a base de datos</p>
+                        </div>
+                        <span class="count-pill" id="contadorConceptos">4 CONCEPTOS</span>
+                    </div>
+
+                    <table class="table-custom" id="tablaAlmacen">
+                        <thead>
+                            <tr>
+                                <th>NO.</th>
+                                <th>HERRAMIENTA</th>
+                                <th>CATEGORÍA</th>
+                                <th>CANTIDAD</th>
+                                <th>UNIDAD</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Llave combinada</td>
+                                <td>Herramienta manual</td>
+                                <td class="col-cant">4</td>
+                                <td>Piezas</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Llave dinamométrica</td>
+                                <td>Herramienta especializada</td>
+                                <td class="col-cant">2</td>
+                                <td>Piezas</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Extractor de poleas</td>
+                                <td>Herramienta especializada</td>
+                                <td class="col-cant">1</td>
+                                <td>Juego</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Llave Torx</td>
+                                <td>Herramienta manual</td>
+                                <td class="col-cant">3</td>
+                                <td>Juegos</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr style="background:#f1f5f9; font-weight:700;">
+                                <td colspan="3">Total de unidades</td>
+                                <td id="totalUnidades">10</td>
+                                <td>—</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function agregarRecurso() {
+            const recurso = document.getElementById('selectRecurso').value;
+            const cantidad = parseInt(document.getElementById('cantRecurso').value, 10);
+            const categoria = document.querySelector('input[name="catRecurso"]:checked').value;
+
+            if (!recurso) {
+                alert('Por favor, selecciona una pieza o herramienta.');
+                return;
+            }
+            if (isNaN(cantidad) || cantidad < 1) {
+                alert('Ingresa una cantidad válida.');
+                return;
+            }
+
+            const tbody = document.querySelector('#tablaAlmacen tbody');
+            const numFila = tbody.rows.length + 1;
+
+            const fila = document.createElement('tr');
+            fila.innerHTML = `
+                <td>${numFila}</td>
+                <td>${recurso}</td>
+                <td>${categoria}</td>
+                <td class="col-cant">${cantidad}</td>
+                <td>Piezas</td>
+            `;
+            tbody.appendChild(fila);
+
+            actualizarTotalesAlmacen();
+            document.getElementById('selectRecurso').value = '';
+            document.getElementById('cantRecurso').value = 1;
+        }
+
+        function actualizarTotalesAlmacen() {
+            const filas = document.querySelectorAll('#tablaAlmacen tbody tr');
+            let suma = 0;
+            filas.forEach(tr => {
+                suma += parseInt(tr.querySelector('.col-cant').textContent, 10) || 0;
+            });
+            document.getElementById('totalUnidades').textContent = suma;
+            document.getElementById('contadorConceptos').textContent = `${filas.length} CONCEPTOS`;
+        }
+    </script>
+</body>
+</html>

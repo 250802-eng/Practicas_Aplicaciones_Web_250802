@@ -1,38 +1,572 @@
-@import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-    --bg-main: #dce7e1;
+    --bg-main: #eef2f6;
     --card-bg: #ffffff;
+    --navy-dark: #0f3a6d;
+    --navy-light: #1d5ca8;
     --primary-orange: #d9531e;
-    --primary-blue: #0284c7;
-    --text-dark: #334155;
+    --text-dark: #1e293b;
     --text-muted: #64748b;
     --border-color: #cbd5e1;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: var(--bg-main); color: var(--text-dark); padding: 20px; }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-.main-wrapper { max-width: 1050px; margin: 0 auto; }
-.content-area { display: flex; flex-direction: column; gap: 20px; }
+body {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-dark);
+    padding: 24px;
+    line-height: 1.5;
+}
 
-/* STEPPER WIZARD SUPERIOR */
+.main-wrapper {
+    max-width: 1120px;
+    margin: 0 auto;
+}
+
+.content-area {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* =========================================
+   ENCABEZADO INSTITUCIONAL AZUL (SGTM)
+========================================= */
+.top-banner {
+    background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-light) 100%);
+    color: #ffffff;
+    border-radius: 16px;
+    padding: 28px 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(15, 58, 109, 0.15);
+}
+
+.banner-info h1 {
+    font-size: 1.65rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.banner-info p {
+    font-size: 0.88rem;
+    opacity: 0.88;
+    margin-bottom: 14px;
+}
+
+.tech-badges {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.tech-badge {
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 600;
+}
+
+.logo-box {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 14px 24px;
+    border-radius: 12px;
+    text-align: center;
+    min-width: 100px;
+}
+
+.logo-box i {
+    font-size: 1.6rem;
+    margin-bottom: 4px;
+    display: block;
+}
+
+.logo-box span {
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 1.5px;
+}
+
+/* =========================================
+   BARRA DE NAVEGACIÓN TIPO PÍLDORA
+========================================= */
+.nav-bar {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 10px 18px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.nav-pill {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 9px 18px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.nav-pill:hover {
+    background: #f1f5f9;
+    color: var(--text-dark);
+}
+
+.nav-pill.active {
+    background: var(--navy-light);
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(29, 92, 168, 0.25);
+}
+
+/* =========================================
+   TARJETAS PRINCIPALES Y ENCABEZADOS
+========================================= */
+.wizard-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.module-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.module-title-group {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.module-num {
+    background: #e2e8f0;
+    color: var(--text-dark);
+    font-weight: 700;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+}
+
+.paso-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--navy-light);
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    display: block;
+}
+
+.wizard-card h2, .wizard-step h2 {
+    font-size: 1.45rem;
+    color: var(--text-dark);
+    margin: 2px 0;
+}
+
+.step-subtitle {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+}
+
+.count-pill {
+    background: #e0f2fe;
+    color: #0369a1;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+}
+
+/* =========================================
+   SUB-TARJETAS DE PRÁCTICA (05, 06, 07, 10)
+========================================= */
+.practice-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 24px;
+    position: relative;
+}
+
+.card-num {
+    display: inline-block;
+    font-size: 0.72rem;
+    background: #e2e8f0;
+    color: var(--text-dark);
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-weight: 700;
+    margin-right: 8px;
+}
+
+.practice-card h4 {
+    display: inline-block;
+    font-size: 1rem;
+    color: var(--text-dark);
+    margin-bottom: 12px;
+}
+
+.grid-2-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+/* =========================================
+   FORMULARIOS, INPUTS Y SELECTORES
+========================================= */
+.form-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.full-width {
+    grid-column: span 2;
+}
+
+.filter-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr 1fr auto;
+    gap: 24px;
+    align-items: end;
+    margin-top: 15px;
+}
+
+.almacen-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 2fr 110px auto;
+    gap: 24px;
+    align-items: end;
+    margin-top: 15px;
+}
+
+.field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.field-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.radio-group {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 8px 0;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.88rem;
+    color: var(--text-dark);
+    cursor: pointer;
+}
+
+.radio-label input[type="radio"] {
+    accent-color: var(--navy-light);
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.input-container label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.input-with-icon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1.5px solid var(--border-color);
+    padding: 7px 4px;
+    transition: border-color 0.25s;
+}
+
+.input-with-icon i, .input-with-icon span {
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+.input-underline {
+    border: none;
+    outline: none;
+    background: transparent;
+    width: 100%;
+    font-size: 0.9rem;
+    font-family: inherit;
+    color: var(--text-dark);
+}
+
+.input-underline:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.input-with-icon:focus-within,
+.input-with-icon.filled {
+    border-bottom-color: var(--navy-light);
+}
+
+.input-with-icon:focus-within i {
+    color: var(--navy-light);
+}
+
+/* Resaltado en rojo para campos obligatorios incompletos */
+.input-with-icon.error-border {
+    border-bottom-color: #ef4444 !important;
+}
+
+.input-with-icon.error-border i {
+    color: #ef4444 !important;
+}
+
+/* =========================================
+   BOTONES
+========================================= */
+.btn-blue {
+    background: var(--navy-light);
+    color: #ffffff;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+}
+
+.btn-blue:hover {
+    background: var(--navy-dark);
+}
+
+.btn-primary {
+    background: var(--primary-orange);
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-orange {
+    background: var(--primary-orange);
+    color: white;
+    border: none;
+    padding: 11px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.btn-sec {
+    background: #e2e8f0;
+    color: var(--text-dark);
+    border: none;
+    padding: 9px 18px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-sec:hover {
+    background: #cbd5e1;
+}
+
+.btn-flat {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    padding: 10px 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* =========================================
+   TABLAS Y ETIQUETAS DE ESTADO
+========================================= */
+.table-custom {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+    font-size: 0.84rem;
+    background: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+}
+
+.table-custom th {
+    background: #f1f5f9;
+    text-align: left;
+    padding: 12px 14px;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.table-custom td {
+    padding: 13px 14px;
+    border-bottom: 1px solid #f1f5f9;
+    color: var(--text-dark);
+    vertical-align: middle;
+}
+
+.table-custom tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+.badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.74rem;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.status-green { background: #dcfce7; color: #15803d; }
+.status-blue { background: #e0f2fe; color: #0369a1; }
+.status-red { background: #fee2e2; color: #b91c1c; }
+.status-yellow { background: #fef3c7; color: #b45309; }
+
+/* =========================================
+   CONFIGURACIÓN (PALETA, COLORES, PERFIL)
+========================================= */
+.palette-box {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    padding: 14px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+}
+
+.palette-preview {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.swatch {
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+}
+
+.config-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    padding: 10px 14px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+}
+
+input[type="color"] {
+    border: none;
+    width: 36px;
+    height: 28px;
+    background: transparent;
+    cursor: pointer;
+}
+
+input[type="range"] {
+    accent-color: var(--navy-light);
+    cursor: pointer;
+}
+
+.profile-card-box {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    margin-bottom: 16px;
+}
+
+.avatar-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--navy-light);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+/* =========================================
+   STEPPER WIZARD (PARA REGISTRO DE USUARIOS)
+========================================= */
 .stepper-card {
     background: var(--card-bg);
-    border-radius: 12px;
+    border-radius: 16px;
     padding: 25px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
 .step-line {
     position: absolute;
-    top: 42px;
-    left: 10%;
-    right: 10%;
+    top: 48px;
+    left: 12%;
+    right: 12%;
     height: 2px;
     background: #e2e8f0;
     z-index: 1;
@@ -61,9 +595,8 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: var(--bg-m
     align-items: center;
     justify-content: center;
     position: relative;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: #64748b;
-    transition: all 0.3s;
 }
 
 .step-num {
@@ -73,9 +606,10 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: var(--bg-m
     font-size: 0.65rem;
     font-weight: bold;
     background: #f1f5f9;
-    padding: 1px 4px;
+    padding: 1px 5px;
     border-radius: 8px;
     border: 1px solid #cbd5e1;
+    color: var(--text-dark);
 }
 
 .step-item.active .step-badge {
@@ -91,108 +625,13 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: var(--bg-m
 }
 
 .step-title { font-size: 0.82rem; font-weight: 600; color: var(--text-dark); }
-
-/* TARJETA DEL WIZARD */
-.wizard-card {
-    background: var(--card-bg);
-    border-radius: 12px;
-    padding: 30px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-
 .wizard-step { display: none; }
 .wizard-step.active { display: block; }
-
-.paso-tag { font-size: 0.75rem; font-weight: bold; color: var(--primary-orange); letter-spacing: 1px; }
-.wizard-step h2 { font-size: 1.4rem; color: var(--text-dark); margin: 5px 0; }
-.step-subtitle { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 25px; }
-
-.form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.full-width { grid-column: span 2; }
-
-/* CASILLAS Y ENTRADAS SIN BORDES PESADOS */
-.input-container { display: flex; flex-direction: column; gap: 5px; }
-.input-container label { font-size: 0.8rem; font-weight: 600; color: var(--text-dark); }
-
-.input-with-icon {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    border-bottom: 2px solid var(--border-color);
-    padding: 6px 0;
-    transition: border-color 0.3s;
-}
-
-.input-with-icon i { color: #94a3b8; font-size: 0.95rem; }
-
-.input-underline {
-    border: none;
-    outline: none;
-    background: transparent;
-    width: 100%;
-    font-size: 0.9rem;
-    color: var(--text-dark);
-}
-
-/* SUBRAYADO EN AZUL / NARANJA AL ENFOCAR O LLENAR */
-.input-with-icon:focus-within,
-.input-with-icon.filled {
-    border-bottom-color: var(--primary-orange);
-}
-
-.input-with-icon:focus-within i { color: var(--primary-orange); }
-
-.input-hint { font-size: 0.7rem; color: #ef4444; }
-.edad-box { font-size: 0.8rem; padding: 8px; background: #f8fafc; border-radius: 6px; margin-top: 5px; color: var(--text-muted); }
-
-/* ALERTA SIMULADA DE ENVÍO */
-.simulated-alert {
-    background: #fef3c7;
-    border: 1px solid #fde047;
-    color: #92400e;
-    padding: 10px 15px;
-    border-radius: 8px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    margin-bottom: 20px;
-}
-
-/* PIE Y BOTONES */
-.wizard-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid #f1f5f9;
-}
-
+.input-hint { font-size: 0.72rem; color: #ef4444; }
+.edad-box { font-size: 0.8rem; padding: 8px 12px; background: #f8fafc; border-radius: 6px; margin-top: 5px; color: var(--text-muted); }
+.simulated-alert { background: #fef3c7; border: 1px solid #fde047; color: #92400e; padding: 10px 15px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; margin-bottom: 20px; }
+.wizard-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #f1f5f9; }
 .footer-right { display: flex; gap: 10px; }
-
-.btn-primary { background: var(--primary-orange); color: white; border: none; padding: 10px 22px; border-radius: 20px; font-weight: 600; cursor: pointer; }
-.btn-sec { background: #e2e8f0; color: var(--text-dark); border: none; padding: 10px 20px; border-radius: 20px; font-weight: 600; cursor: pointer; }
-.btn-flat { background: transparent; border: none; color: var(--text-muted); padding: 10px 15px; font-weight: 600; cursor: pointer; }
-.btn-dark { background: #0f172a; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-size: 0.85rem; cursor: pointer; }
-
-/* PRÁCTICAS Y TABLAS */
-.lab-header { display: flex; align-items: center; gap: 15px; margin-top: 20px; }
-.lab-badge { background: #f97316; color: white; padding: 4px 8px; border-radius: 6px; font-weight: bold; }
-
-.practice-card { background: var(--card-bg); border-radius: 12px; padding: 25px; margin-top: 15px; position: relative; }
-.card-num { position: absolute; top: 15px; right: 15px; font-size: 0.75rem; background: #f1f5f9; padding: 2px 8px; border-radius: 4px; font-weight: bold; }
-
-.grid-2-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-
-.table-custom { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.82rem; }
-.table-custom th { background: #f8fafc; text-align: left; padding: 10px; color: var(--text-muted); border-bottom: 2px solid #e2e8f0; }
-.table-custom td { padding: 10px; border-bottom: 1px solid #f1f5f9; color: var(--text-dark); }
-
-.badge { padding: 3px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: bold; }
-.status-green { background: #dcfce7; color: #15803d; }
-.status-blue { background: #e0f2fe; color: #0369a1; }
-.status-red { background: #fee2e2; color: #b91c1c; }
-.status-yellow { background: #fef3c7; color: #b45309; }
-
 .time-range-row { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; }
 .inline-time { width: 140px; }
 .social-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin-top: 15px; }
@@ -201,12 +640,41 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: var(--bg-m
 .qr-preview-box { background: #f8fafc; border: 1px dashed #cbd5e1; padding: 15px; border-radius: 8px; text-align: center; font-size: 0.8rem; }
 .qr-placeholder { margin: 15px 0; color: #94a3b8; }
 .qr-placeholder i { font-size: 2rem; }
-CSS
-/* Resaltado en rojo para campos obligatorios incompletos */
+
+/* RESPONSIVO */
+@media (max-width: 850px) {
+    .filter-grid, .almacen-grid, .grid-2-cards, .form-grid-2 {
+        grid-template-columns: 1fr;
+    }
+    .full-width { grid-column: span 1; }
+} 
+/* =========================================
+   ESTADOS DE VALIDACIÓN PROFESIONAL
+========================================= */
+.input-hint {
+    font-size: 0.74rem;
+    color: var(--text-muted);
+    min-height: 16px;
+    transition: color 0.2s;
+}
+
+.input-hint.error-text {
+    color: #dc2626;
+    font-weight: 600;
+}
+
 .input-with-icon.error-border {
-    border-bottom-color: #ef4444 !important;
+    border-bottom-color: #dc2626 !important;
 }
 
 .input-with-icon.error-border i {
-    color: #ef4444 !important;
+    color: #dc2626 !important;
+}
+
+.input-with-icon.valid-border {
+    border-bottom-color: #16a34a !important;
+}
+
+.input-with-icon.valid-border i {
+    color: #16a34a !important;
 }

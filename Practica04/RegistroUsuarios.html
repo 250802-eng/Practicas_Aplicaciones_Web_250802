@@ -6,471 +6,745 @@
     <title>MecaGest - Registro de Usuarios</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Control de vistas tipo SPA en una sola página */
+        .vista-modulo { display: none; }
+        .vista-modulo.activa { display: flex; flex-direction: column; gap: 20px; }
+        .nav-pill { border: none; background: transparent; cursor: pointer; font-family: inherit; }
+    </style>
+    <script src="./data/domicilios.js"></script>
+<script src="./js/app.js"></script>
 </head>
 <body>
     <div class="main-wrapper">
         <main class="content-area">
-            <!-- STEPPER WIZARD SUPERIOR -->
-            <div class="stepper-card">
-                <div class="step-line"></div>
-                <div class="step-item active" id="step-btn-1" onclick="irAlPaso(1)">
-                    <div class="step-badge"><i class="fa-regular fa-user"></i><span class="step-num">01</span></div>
-                    <span class="step-title">Datos personales</span>
+            
+            <!-- ENCABEZADO INSTITUCIONAL FIJO -->
+            <header class="top-banner">
+                <div class="banner-info">
+                    <h1 id="bannerTitulo">Registro de usuarios</h1>
+                    <p id="bannerDesc">Alta de nuevos perfiles en la plataforma MecaGest Desktop.</p>
+                    <div class="tech-badges">
+                        <span class="tech-badge">HTML5 semántico</span>
+                        <span class="tech-badge">CSS puro</span>
+                        <span class="tech-badge">JavaScript - Práctica 05</span>
+                    </div>
                 </div>
-                <div class="step-item" id="step-btn-2" onclick="irAlPaso(2)">
-                    <div class="step-badge"><i class="fa-regular fa-address-card"></i><span class="step-num">02</span></div>
-                    <span class="step-title">Datos de contacto</span>
+                <div class="logo-box">
+                    <i class="fa-solid fa-van-shuttle"></i>
+                    <span>SGTM</span>
                 </div>
-                <div class="step-item" id="step-btn-3" onclick="irAlPaso(3)">
-                    <div class="step-badge"><i class="fa-solid fa-lock"></i><span class="step-num">03</span></div>
-                    <span class="step-title">Datos de acceso</span>
-                </div>
-                <div class="step-item" id="step-btn-4" onclick="irAlPaso(4)">
-                    <div class="step-badge"><i class="fa-solid fa-location-dot"></i><span class="step-num">04</span></div>
-                    <span class="step-title">Datos de ubicación</span>
+            </header>
+
+            <!-- BARRA DE NAVEGACIÓN (NO REDIRIGE A OTRAS HOJAS) -->
+            <nav class="nav-bar">
+                <button type="button" class="nav-pill active" onclick="cambiarVista('registro', this)">
+                    <i class="fa-regular fa-user"></i> Registro de usuarios
+                </button>
+                <button type="button" class="nav-pill" onclick="cambiarVista('citas', this)">
+                    <i class="fa-regular fa-calendar-check"></i> Próximas citas
+                </button>
+                <button type="button" class="nav-pill" onclick="cambiarVista('configuracion', this)">
+                    <i class="fa-solid fa-gear"></i> Configuración
+                </button>
+                <button type="button" class="nav-pill" onclick="cambiarVista('almacen', this)">
+                    <i class="fa-solid fa-wrench"></i> Salidas de almacén
+                </button>
+            </nav>
+
+<!-- =========================================================
+     VISTA 1: REGISTRO DE USUARIOS (VALIDACIÓN PROFESIONAL)
+========================================================== -->
+<section id="vista-registro" class="vista-modulo activa">
+    <!-- STEPPER WIZARD SUPERIOR -->
+    <div class="stepper-card">
+        <div class="step-line"></div>
+        <div class="step-item active" id="step-btn-1" onclick="intentarIrAlPaso(1)">
+            <div class="step-badge"><i class="fa-regular fa-user"></i><span class="step-num">01</span></div>
+            <span class="step-title">Datos personales</span>
+        </div>
+        <div class="step-item" id="step-btn-2" onclick="intentarIrAlPaso(2)">
+            <div class="step-badge"><i class="fa-regular fa-address-card"></i><span class="step-num">02</span></div>
+            <span class="step-title">Datos de contacto</span>
+        </div>
+        <div class="step-item" id="step-btn-3" onclick="intentarIrAlPaso(3)">
+            <div class="step-badge"><i class="fa-solid fa-lock"></i><span class="step-num">03</span></div>
+            <span class="step-title">Datos de acceso</span>
+        </div>
+        <div class="step-item" id="step-btn-4" onclick="intentarIrAlPaso(4)">
+            <div class="step-badge"><i class="fa-solid fa-location-dot"></i><span class="step-num">04</span></div>
+            <span class="step-title">Datos de ubicación</span>
+        </div>
+    </div>
+
+    <!-- CONTENEDOR DE PASOS WIZARD -->
+    <div class="wizard-card">
+        <form id="registroForm" novalidate>
+            <!-- PASO 1 -->
+            <div class="wizard-step active" id="wizard-step-1">
+                <span class="paso-tag">PASO 01 DE 04</span>
+                <h2>Datos personales</h2>
+                <p class="step-subtitle">Comencemos con la información básica de tu perfil. Los campos con (*) son obligatorios.</p>
+
+                <div class="form-grid-2">
+                    <div class="input-container">
+                        <label for="nombre">Nombre *</label>
+                        <div class="input-with-icon" id="wrap-nombre">
+                            <i class="fa-regular fa-user"></i>
+                            <input type="text" id="nombre" placeholder="Jesus Yahir" maxlength="40" class="input-underline" required>
+                        </div>
+                        <span class="input-hint" id="err-nombre">Solo letras y espacios (mín. 2 caracteres).</span>
+                    </div>
+
+                    <div class="input-container">
+                        <label for="apPaterno">Apellido paterno *</label>
+                        <div class="input-with-icon" id="wrap-apPaterno">
+                            <i class="fa-regular fa-user"></i>
+                            <input type="text" id="apPaterno" placeholder="Calderon" maxlength="30" class="input-underline" required>
+                        </div>
+                        <span class="input-hint" id="err-apPaterno">Solo letras (mín. 2 caracteres).</span>
+                    </div>
+
+                    <div class="input-container">
+                        <label for="apMaterno">Apellido materno</label>
+                        <div class="input-with-icon" id="wrap-apMaterno">
+                            <i class="fa-regular fa-user"></i>
+                            <input type="text" id="apMaterno" placeholder="lopez" maxlength="30" class="input-underline">
+                        </div>
+                        <span class="input-hint" id="err-apMaterno">Opcional. Solo letras.</span>
+                    </div>
+
+                    <div class="input-container">
+                        <label for="genero">Género *</label>
+                        <div class="input-with-icon" id="wrap-genero">
+                            <i class="fa-solid fa-venus-mars"></i>
+                            <select id="genero" class="input-underline" required>
+                                <option value="">Selecciona una opción</option>
+                                <option value="M">Masculino</option>
+                                <option value="F">Femenino</option>
+                                <option value="X">Prefiero no decirlo</option>
+                            </select>
+                        </div>
+                        <span class="input-hint" id="err-genero">Selecciona una opción de la lista.</span>
+                    </div>
+
+                    <div class="input-container full-width">
+                        <label for="fechaNacimiento">Fecha de nacimiento *</label>
+                        <div class="input-with-icon" id="wrap-fechaNacimiento">
+                            <i class="fa-regular fa-calendar"></i>
+                            <input type="date" id="fechaNacimiento" class="input-underline" required>
+                        </div>
+                        <span class="input-hint" id="err-fechaNacimiento">Debes ser mayor de 18 años.</span>
+                        <div id="resultadoEdad" class="edad-box">Selecciona una fecha para calcular tu edad.</div>
+                    </div>
                 </div>
             </div>
 
-            <!-- CONTENEDOR DE PASOS WIZARD -->
-            <div class="wizard-card">
-                <form id="registroForm">
-                    <!-- PASO 1 -->
-                    <div class="wizard-step active" id="wizard-step-1">
-                        <span class="paso-tag">PASO 01 DE 04</span>
-                        <h2>Datos personales</h2>
-                        <p class="step-subtitle">Comencemos con la información básica de tu perfil.</p>
+            <!-- PASO 2 -->
+            <div class="wizard-step" id="wizard-step-2">
+                <span class="paso-tag">PASO 02 DE 04</span>
+                <h2>Datos de contacto</h2>
+                <p class="step-subtitle">Cuéntanos cómo podemos comunicarnos contigo.</p>
 
-                        <div class="form-grid-2">
-                            <div class="input-container">
-                                <label>Nombre *</label>
-                                <div class="input-with-icon">
-                                    <i class="fa-regular fa-user"></i>
-                                    <input type="text" id="nombre" placeholder="Marco Antonio" class="input-underline" required>
-                                </div>
-                                <span class="input-hint">Este campo es obligatorio.</span>
+                <div class="form-grid-2">
+                    <div class="input-container">
+                        <label for="email">Correo electrónico *</label>
+                        <div class="input-with-icon" id="wrap-email">
+                            <i class="fa-regular fa-envelope"></i>
+                            <input type="email" id="email" placeholder="marco@ejemplo.com" maxlength="80" class="input-underline" required>
+                        </div>
+                        <span class="input-hint" id="err-email">Formato válido requerido: usuario@dominio.com</span>
+                    </div>
+
+                    <div class="input-container">
+                        <label for="numTelefonico">Número telefónico *</label>
+                        <div class="input-with-icon" id="wrap-numTelefonico">
+                            <i class="fa-solid fa-phone"></i>
+                            <input type="tel" id="numTelefonico" placeholder="5512345678" minlength="10" maxlength="15" inputmode="numeric" class="input-underline" required>
+                        </div>
+                        <span class="input-hint" id="err-numTelefonico">Solo números: entre 10 y 15 dígitos.</span>
+                    </div>
+
+                    <div class="input-container full-width">
+                        <label>Horario preferido de contacto</label>
+                        <div class="time-range-row">
+                            <span>Desde</span>
+                            <div class="input-with-icon inline-time" id="wrap-horarioInicio">
+                                <i class="fa-regular fa-clock"></i>
+                                <input type="time" id="horarioInicio" class="input-underline">
                             </div>
-                            <div class="input-container">
-                                <label>Apellido paterno *</label>
-                                <div class="input-with-icon">
-                                    <i class="fa-regular fa-user"></i>
-                                    <input type="text" id="apPaterno" placeholder="Ramírez" class="input-underline" required>
-                                </div>
-                                <span class="input-hint">Este campo es obligatorio.</span>
+                            <span>Hasta</span>
+                            <div class="input-with-icon inline-time" id="wrap-horarioFin">
+                                <i class="fa-regular fa-clock"></i>
+                                <input type="time" id="horarioFin" class="input-underline">
                             </div>
-                            <div class="input-container">
-                                <label>Apellido materno</label>
-                                <div class="input-with-icon">
-                                    <i class="fa-regular fa-user"></i>
-                                    <input type="text" id="apMaterno" placeholder="Hernández" class="input-underline">
+                        </div>
+                        <span class="input-hint" id="err-horario">Opcional. La hora final debe ser mayor a la inicial.</span>
+                    </div>
+                </div>
+
+                <div class="social-section" style="margin-top:20px;">
+                    <h4>Redes sociales y mensajería</h4>
+                    <div class="social-grid">
+                        <div class="social-left">
+                            <div class="social-item">
+                                <input type="checkbox" id="chkFb" onchange="toggleRedSocial('chkFb', 'urlFb')">
+                                <label for="chkFb">Facebook</label>
+                                <div class="input-with-icon flex-1" id="wrap-urlFb">
+                                    <i class="fa-brands fa-facebook"></i>
+                                    <input type="url" id="urlFb" placeholder="https://facebook.com/usuario" class="input-underline" disabled>
                                 </div>
                             </div>
-                            <div class="input-container">
-                                <label>Género</label>
+                            <div class="social-item">
+                                <input type="checkbox" id="chkIn" onchange="toggleRedSocial('chkIn', 'urlIn')">
+                                <label for="chkIn">LinkedIn</label>
+                                <div class="input-with-icon flex-1" id="wrap-urlIn">
+                                    <i class="fa-brands fa-linkedin"></i>
+                                    <input type="url" id="urlIn" placeholder="https://linkedin.com/in/usuario" class="input-underline" disabled>
+                                </div>
+                            </div>
+                            <span class="input-hint" id="err-redes"></span>
+                            <div class="qr-upload" style="margin-top:10px;">
+                                <span style="font-size:0.8rem; font-weight:600; display:block; margin-bottom:5px;">Adjuntar QR WhatsApp (Solo imagen)</span>
+                                <input type="file" id="qrInput" accept="image/png, image/jpeg, image/webp" onchange="previsualizarQR(event)">
+                            </div>
+                        </div>
+                        <div class="qr-preview-box">
+                            <h5>Vista previa de WhatsApp</h5>
+                            <div class="qr-placeholder" id="qrPreviewContainer">
+                                <i class="fa-regular fa-image"></i>
+                                <p>Ningún archivo seleccionado</p>
+                            </div>
+                            <small>Sólo vista previa local (máx. 2 MB).</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PASO 3 -->
+            <div class="wizard-step" id="wizard-step-3">
+                <span class="paso-tag">PASO 03 DE 04</span>
+                <h2>Datos de acceso</h2>
+                <p class="step-subtitle">Crea credenciales seguras para acceder a MecaGest.</p>
+
+                <div class="form-grid-2">
+                    <div class="input-container full-width">
+                        <label for="user">Nombre de usuario *</label>
+                        <div class="input-with-icon" id="wrap-user">
+                            <i class="fa-solid fa-at"></i>
+                            <input type="text" id="user" placeholder="marcoramirez" minlength="4" maxlength="20" class="input-underline" required>
+                        </div>
+                        <span class="input-hint" id="err-user">De 4 a 20 caracteres (letras, números o guion bajo, sin espacios).</span>
+                    </div>
+
+                    <div class="input-container">
+                        <label for="password">Contraseña *</label>
+                        <div class="input-with-icon" id="wrap-password">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="password" placeholder="••••••••" minlength="8" maxlength="32" class="input-underline" required>
+                        </div>
+                        <span class="input-hint" id="err-password">Mín. 8 caracteres, 1 mayúscula, 1 minúscula y 1 número.</span>
+                    </div>
+
+                    <div class="input-container">
+                        <label for="confirmarPassword">Confirmar contraseña *</label>
+                        <div class="input-with-icon" id="wrap-confirmarPassword">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="confirmarPassword" placeholder="••••••••" minlength="8" maxlength="32" class="input-underline" required>
+                        </div>
+                        <span class="input-hint" id="err-confirmarPassword">Debe coincidir exactamente con la contraseña.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PASO 4 -->
+            <div class="wizard-step" id="wizard-step-4">
+                <span class="paso-tag">PASO 04 DE 04</span>
+                <h2>Datos de ubicación</h2>
+                <p class="step-subtitle">Indica dónde podemos localizarte.</p>
+
+                <div class="simulated-alert" id="alertaFinal" style="display:none;">
+                    ¡Registro validado correctamente! Envío simulado completado.
+                </div>
+
+                <div class="form-grid-2">
+    <div class="input-container full-width">
+        <label for="direccion">Dirección (Calle, número, colonia) *</label>
+        <div class="input-with-icon" id="wrap-direccion">
+            <i class="fa-solid fa-house"></i>
+            <input type="text" id="direccion" list="listaColonias" placeholder="Calle Juárez #45, Col. Centro" minlength="5" maxlength="120" class="input-underline" required>
+        </div>
+        <datalist id="listaColonias"></datalist>
+        <span class="input-hint" id="err-direccion">Incluye calle, número y colonia (mín. 5 caracteres).</span>
+    </div>
+
+    <div class="input-container">
+        <label for="pais">País *</label>
+        <div class="input-with-icon" id="wrap-pais">
+            <i class="fa-solid fa-globe"></i>
+            <input type="text" id="pais" list="listaPaises" placeholder="México" maxlength="40" class="input-underline" required>
+        </div>
+        <datalist id="listaPaises"></datalist>
+        <span class="input-hint" id="err-pais">Selecciona o escribe un país (mín. 3 letras).</span>
+    </div>
+
+    <div class="input-container">
+        <label for="estado">Estado *</label>
+        <div class="input-with-icon" id="wrap-estado">
+            <i class="fa-solid fa-location-dot"></i>
+            <input type="text" id="estado" list="listaEstados" placeholder="Puebla" maxlength="40" class="input-underline" required>
+        </div>
+        <datalist id="listaEstados"></datalist>
+        <span class="input-hint" id="err-estado">Selecciona o escribe un estado (mín. 3 letras).</span>
+    </div>
+
+    <div class="input-container">
+        <label for="ciudad">Ciudad / Municipio *</label>
+        <div class="input-with-icon" id="wrap-ciudad">
+            <i class="fa-solid fa-city"></i>
+            <input type="text" id="ciudad" list="listaCiudades" placeholder="Xicotepec" maxlength="50" class="input-underline" required>
+        </div>
+        <datalist id="listaCiudades"></datalist>
+        <span class="input-hint" id="err-ciudad">Selecciona o escribe una ciudad (mín. 3 letras).</span>
+    </div>
+
+    <div class="input-container">
+        <label for="codigoPostal">Código postal *</label>
+        <div class="input-with-icon" id="wrap-codigoPostal">
+            <i class="fa-solid fa-envelope-open-text"></i>
+            <input type="text" id="codigoPostal" list="listaCP" placeholder="73080" minlength="5" maxlength="5" inputmode="numeric" class="input-underline" required>
+        </div>
+        <datalist id="listaCP"></datalist>
+        <span class="input-hint" id="err-codigoPostal">Exactamente 5 dígitos numéricos.</span>
+    </div>
+</div>
+
+                <div class="terms-check" style="margin-top: 18px;">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">Acepto los términos y condiciones de uso de la plataforma <strong>MecaGest</strong>. *</label>
+                    <span class="input-hint" id="err-terms" style="display:block; margin-top:4px;"></span>
+                </div>
+            </div>
+
+            <!-- BOTONES DE NAVEGACIÓN -->
+            <div class="wizard-footer">
+                <button type="button" class="btn-sec" id="btnAnterior" onclick="pasoAnterior()" style="visibility:hidden;">← Anterior</button>
+                <div class="footer-right">
+                    <button type="button" class="btn-flat" onclick="limpiarCampos()">Limpiar</button>
+                    <button type="button" class="btn-primary" id="btnSiguiente" onclick="pasoSiguiente()">Siguiente →</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+            <!-- =========================================================
+                 VISTA 2: PRÓXIMAS CITAS
+            ========================================================== -->
+            <section id="vista-citas" class="vista-modulo">
+                <div class="wizard-card">
+                    <div class="module-header">
+                        <div class="module-title-group">
+                            <span class="module-num">01</span>
+                            <div>
+                                <span class="paso-tag">MÓDULOS DE PRÁCTICA · MECAGEST</span>
+                                <h2>Próximas citas</h2>
+                                <p class="step-subtitle" style="margin-bottom:0;">Consulta de citas de ejemplo y solicitud de una nueva cita.</p>
+                            </div>
+                        </div>
+                        <span class="paso-tag" style="color:#64748b;">HTML + CSS + JS</span>
+                    </div>
+
+                    <div class="practice-card">
+                        <span class="card-num">05</span>
+                        <h4>Visualización de citas</h4>
+                        <div class="filter-grid">
+                            <div class="field-group">
+                                <span class="field-label">Filtrar citas por:</span>
+                                <div class="radio-group">
+                                    <label class="radio-label"><input type="radio" name="filterCitas" value="mes" onchange="alternarFiltroCitas()"> Mes</label>
+                                    <label class="radio-label"><input type="radio" name="filterCitas" value="semana" checked onchange="alternarFiltroCitas()"> Semana</label>
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <label class="field-label" for="inputMes">Seleccionar mes</label>
                                 <div class="input-with-icon">
-                                    <i class="fa-solid fa-venus-mars"></i>
-                                    <select id="genero" class="input-underline">
-                                        <option value="">Selecciona una opción</option>
-                                        <option value="M">Masculino</option>
-                                        <option value="F">Femenino</option>
-                                        <option value="X">Prefiero no decirlo</option>
+                                    <input type="month" id="inputMes" value="2026-10" class="input-underline" disabled>
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <label class="field-label" for="inputSemana">Seleccionar semana</label>
+                                <div class="input-with-icon">
+                                    <input type="week" id="inputSemana" class="input-underline">
+                                </div>
+                            </div>
+                            <button type="button" class="btn-blue" onclick="filtrarTablaCitas()">Ver citas</button>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 25px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <h3>Citas programadas</h3>
+                            <span class="count-pill">5 REGISTROS</span>
+                        </div>
+                        <table class="table-custom">
+                            <thead>
+                                <tr>
+                                    <th>NO.</th>
+                                    <th>NOMBRE Y UNIDAD</th>
+                                    <th>DESCRIPCIÓN</th>
+                                    <th>FECHA PROGRAMADA</th>
+                                    <th>ESTATUS ACTUAL</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Cita de entrega de unidad reparada con el cliente: Mauricio Mejía, Unidad: Volkswagen, Jetta 2020</td>
+                                    <td>Se realizó un cambio de bujías, la unidad está lista para entrega.</td>
+                                    <td>10 de octubre de 2026</td>
+                                    <td><span class="badge status-green">Atendida</span></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Cita de valoración con el cliente: Bertha Hdz Aranda, Unidad: Renault, Duster 2022</td>
+                                    <td>El cliente solicita una revisión del cuerpo de aceleración para posible mantenimiento correctivo.</td>
+                                    <td>16 de octubre de 2026</td>
+                                    <td><span class="badge status-blue">Programada</span></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Cita de valoración con el cliente: Mauricio Mejía, Unidad: Volkswagen, Jetta 2020</td>
+                                    <td>A la unidad se le hicieron cambio de bujías, pero el cliente reporta un sonido extraño.</td>
+                                    <td>17 de octubre de 2026</td>
+                                    <td><span class="badge status-blue">Programada</span></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Cita de valoración con la cliente: Alejandra Romero, Unidad: Toyota, Hilux 2012</td>
+                                    <td>La cliente solicita una revisión del cuerpo de aceleración para posible mantenimiento correctivo.</td>
+                                    <td>16 de octubre de 2026</td>
+                                    <td><span class="badge status-red">Cancelada</span></td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Cita de valoración con la cliente: Alejandra Romero, Unidad: Toyota, Hilux 2012</td>
+                                    <td>El cliente solicita una revisión del cuerpo de aceleración de la unidad para posible mantenimiento correctivo.</td>
+                                    <td>20 de octubre de 2026</td>
+                                    <td><span class="badge status-yellow">Reprogramada</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- =========================================================
+                 VISTA 3: CONFIGURACIÓN
+            ========================================================== -->
+            <section id="vista-configuracion" class="vista-modulo">
+                <div class="wizard-card">
+                    <div class="module-header">
+                        <div class="module-title-group">
+                            <span class="module-num">01</span>
+                            <div>
+                                <span class="paso-tag">MÓDULOS DE PRÁCTICA · MECAGEST</span>
+                                <h2>Configuración</h2>
+                                <p class="step-subtitle" style="margin-bottom:0;">Personalización de interfaz y cuenta. Los cambios permanentes se implementarán con PHP y MySQL.</p>
+                            </div>
+                        </div>
+                        <span class="paso-tag" style="color:#64748b;">HTML + CSS + JS</span>
+                    </div>
+
+                    <div class="grid-2-cards">
+                        <div class="config-card">
+                            <div class="config-card-header">
+                                <span class="card-num">06</span>
+                                <h4>Configuración de la interfaz</h4>
+                            </div>
+                            <div class="config-box">
+                                <div class="palette-swatches">
+                                    <span class="swatch" style="background:#0f3a6d;"></span>
+                                    <span class="swatch" style="background:#1d5ca8;"></span>
+                                    <span class="swatch" style="background:#d9531e;"></span>
+                                    <span class="swatch" style="background:#64748b;"></span>
+                                </div>
+                                <strong style="font-size:0.85rem; display:block;">Paleta MecaGest Desktop</strong>
+                                <span class="helper-note" style="margin-top:2px;">Azul institucional · Naranja de acento</span>
+                            </div>
+                            <div class="config-box config-inline-row">
+                                <label class="field-label" for="colorFuente">Color de la fuente</label>
+                                <div class="color-picker-wrap">
+                                    <input type="color" id="colorFuente" value="#1e293b" oninput="aplicarColores()">
+                                </div>
+                            </div>
+                            <div class="config-box config-inline-row">
+                                <label class="field-label" for="colorFondo">Color de fondo</label>
+                                <div class="color-picker-wrap">
+                                    <input type="color" id="colorFondo" value="#eef2f6" oninput="aplicarColores()">
+                                </div>
+                            </div>
+                            <div class="config-box">
+                                <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+                                    <label class="field-label" for="rangoVolumen">Volumen de reproducción de sonidos</label>
+                                    <span id="valorVolumen" style="font-size:0.8rem; font-weight:700; color:#1d5ca8;">50%</span>
+                                </div>
+                                <input type="range" id="rangoVolumen" min="0" max="100" value="50" style="width:100%;" oninput="actualizarVolumen(this.value)">
+                                <div class="range-ticks"><span>0%</span><span>50%</span><span>100%</span></div>
+                            </div>
+                            <div>
+                                <button type="button" class="btn-sec" onclick="silenciarSonidos()">
+                                    <i class="fa-solid fa-volume-xmark"></i> Silenciar sonidos
+                                </button>
+                                <span class="helper-note">La selección de colores y el volumen alteran la vista previa en tiempo real.</span>
+                            </div>
+                        </div>
+
+                        <div class="config-card">
+                            <div class="config-card-header">
+                                <span class="card-num">07</span>
+                                <h4>Configuración de mi cuenta</h4>
+                            </div>
+                            <div class="config-box" style="display:flex; align-items:center; gap:15px;">
+                                <div id="avatarPreview" class="avatar-circle">MG</div>
+                                <div>
+                                    <strong style="font-size:0.95rem; display:block;">Perfil de MecaGest</strong>
+                                    <span style="font-size:0.8rem; color:#64748b;">Personalización de cuenta</span>
+                                </div>
+                            </div>
+                            <div class="config-box">
+                                <label class="field-label" for="fotoPerfilInput">Foto de perfil</label>
+                                <input type="file" id="fotoPerfilInput" class="file-input-custom" accept="image/*" onchange="previsualizarAvatar(event)">
+                                <span class="helper-note">Formatos de imagen admitidos por el navegador.</span>
+                            </div>
+                            <div class="config-box">
+                                <div style="display:flex; justify-content:space-between; align-items:center;">
+                                    <span class="field-label">Botón gráfico</span>
+                                    <span class="code-tag">input: image</span>
+                                </div>
+                                <button type="button" class="btn-orange-wide" onclick="alert('Avanzando a la siguiente sección de perfil...')">SIGUIENTE →</button>
+                                <span class="helper-note">Control visual; el envío gráfico se conectará en clases posteriores.</span>
+                            </div>
+                            <div class="config-box">
+                                <input type="hidden" name="usuario_id" value="1">
+                                <span class="helper-note" style="margin-top:0; margin-bottom:12px;">
+                                    <span class="code-tag">input: hidden</span> — Identificador de ejemplo presente en el código HTML, pero no visible en pantalla.
+                                </span>
+                                <div style="display:flex; justify-content:space-between; align-items:center;">
+                                    <span class="field-label">Botón de envío</span>
+                                    <span class="code-tag">input: submit</span>
+                                </div>
+                                <button type="button" class="btn-demo-disabled" disabled>Guardar (demostración)</button>
+                                <span class="helper-note">Deshabilitado hasta conectar persistencia mediante PHP.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- =========================================================
+                 VISTA 4: SALIDAS DE ALMACÉN
+            ========================================================== -->
+            <section id="vista-almacen" class="vista-modulo">
+                <div class="wizard-card">
+                    <div class="module-header">
+                        <div class="module-title-group">
+                            <span class="module-num">01</span>
+                            <div>
+                                <span class="paso-tag">MÓDULOS DE PRÁCTICA · MECAGEST</span>
+                                <h2>Salidas de almacén</h2>
+                                <p class="step-subtitle" style="margin-bottom:0;">Solicitud de herramientas y refacciones asociadas a órdenes de servicio.</p>
+                            </div>
+                        </div>
+                        <span class="paso-tag" style="color:#64748b;">HTML + CSS + JS</span>
+                    </div>
+
+                    <div class="practice-card">
+                        <span class="card-num">10</span>
+                        <h4>Solicitud de herramientas y refacciones</h4>
+                        <div class="almacen-grid">
+                            <div class="field-group">
+                                <span class="field-label">Categoría de recurso</span>
+                                <div class="radio-group">
+                                    <label class="radio-label"><input type="radio" name="catRecurso" value="Refacción" checked> Refacción</label>
+                                    <label class="radio-label"><input type="radio" name="catRecurso" value="Herramienta"> Herramienta</label>
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <label class="field-label" for="selectRecurso">Elige la pieza o herramienta</label>
+                                <div class="input-with-icon">
+                                    <select id="selectRecurso" class="input-underline">
+                                        <option value="">Selecciona un recurso</option>
+                                        <optgroup label="Piezas de motor">
+                                            <option value="Bujía">Bujía</option>
+                                            <option value="Filtro de aceite">Filtro de aceite</option>
+                                            <option value="Banda de distribución">Banda de distribución</option>
+                                        </optgroup>
+                                        <optgroup label="Piezas de transmisión">
+                                            <option value="Disco de embrague">Disco de embrague</option>
+                                            <option value="Collarín de embrague">Collarín de embrague</option>
+                                            <option value="Junta homocinética">Junta homocinética</option>
+                                            <option value="Semieje de transmisión">Semieje de transmisión</option>
+                                        </optgroup>
+                                        <optgroup label="Piezas de suspensión">
+                                            <option value="Amortiguador">Amortiguador</option>
+                                            <option value="Rótula de suspensión">Rótula de suspensión</option>
+                                        </optgroup>
+                                        <optgroup label="Llaves y herramientas especializadas">
+                                            <option value="Llave combinada">Llave combinada</option>
+                                            <option value="Llave Torx">Llave Torx</option>
+                                            <option value="Llave dinamométrica">Llave dinamométrica</option>
+                                            <option value="Extractor de poleas">Extractor de poleas</option>
+                                        </optgroup>
                                     </select>
                                 </div>
                             </div>
-                            <div class="input-container full-width">
-                                <label>Fecha de nacimiento *</label>
+                            <div class="field-group">
+                                <label class="field-label" for="cantRecurso">Cantidad</label>
                                 <div class="input-with-icon">
-                                    <i class="fa-regular fa-calendar"></i>
-                                    <input type="date" id="fechaNacimiento" class="input-underline" required>
+                                    <span>#</span>
+                                    <input type="number" id="cantRecurso" value="1" min="1" class="input-underline">
                                 </div>
-                                <div id="resultadoEdad" class="edad-box">Selecciona una fecha para calcular tu edad.</div>
                             </div>
+                            <button type="button" class="btn-blue" onclick="agregarRecurso()">Solicitar herramienta</button>
                         </div>
                     </div>
 
-                    <!-- PASO 2 -->
-                    <div class="wizard-step" id="wizard-step-2">
-                        <span class="paso-tag">PASO 02 DE 04</span>
-                        <h2>Datos de contacto</h2>
-                        <p class="step-subtitle">Cuéntanos cómo podemos comunicarnos contigo.</p>
-
-                        <div class="form-grid-2">
-                            <div class="input-container">
-                                <label>Correo electrónico *</label>
-                                <div class="input-with-icon">
-                                    <i class="fa-regular fa-envelope"></i>
-                                    <input type="email" id="email" placeholder="marco@ejemplo.com" class="input-underline" required>
-                                </div>
+                    <div style="margin-top: 28px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <div>
+                                <h3>Herramientas para la orden de servicio</h3>
+                                <p class="step-subtitle" style="margin-bottom:0;">Inventario de ejemplo sin conexión a base de datos</p>
                             </div>
-                            <div class="input-container">
-                                <label>Número telefónico *</label>
-                                <div class="input-with-icon">
-                                    <i class="fa-solid fa-phone"></i>
-                                    <input type="tel" id="numTelefonico" placeholder="(55) 1234-5678" class="input-underline" required>
-                                </div>
-                            </div>
-                            <div class="input-container full-width">
-                                <label>Horario preferido de contacto</label>
-                                <div class="time-range-row">
-                                    <span>Desde</span>
-                                    <div class="input-with-icon inline-time">
-                                        <i class="fa-regular fa-clock"></i>
-                                        <input type="time" id="horarioInicio" class="input-underline">
-                                    </div>
-                                    <span>Hasta</span>
-                                    <div class="input-with-icon inline-time">
-                                        <i class="fa-regular fa-clock"></i>
-                                        <input type="time" id="horarioFin" class="input-underline">
-                                    </div>
-                                </div>
-                            </div>
+                            <span class="count-pill" id="contadorConceptos">4 CONCEPTOS</span>
                         </div>
-
-                        <div class="social-section">
-                            <h4>Redes sociales y mensajería</h4>
-                            <div class="social-grid">
-                                <div class="social-left">
-                                    <div class="social-item">
-                                        <input type="checkbox" id="chkFb">
-                                        <label for="chkFb">Facebook</label>
-                                        <div class="input-with-icon flex-1">
-                                            <i class="fa-brands fa-facebook"></i>
-                                            <input type="text" placeholder="https://facebook.com/usuario" class="input-underline">
-                                        </div>
-                                    </div>
-                                    <div class="social-item">
-                                        <input type="checkbox" id="chkIn">
-                                        <label for="chkIn">LinkedIn</label>
-                                        <div class="input-with-icon flex-1">
-                                            <i class="fa-brands fa-linkedin"></i>
-                                            <input type="text" placeholder="https://linkedin.com/in/usuario" class="input-underline">
-                                        </div>
-                                    </div>
-                                    <div class="qr-upload">
-                                        <span>Adjuntar QR WhatsApp</span>
-                                        <input type="file" id="qrInput">
-                                    </div>
-                                </div>
-                                <div class="qr-preview-box">
-                                    <h5>Vista previa de WhatsApp</h5>
-                                    <div class="qr-placeholder">
-                                        <i class="fa-regular fa-image"></i>
-                                        <p>Ningún archivo seleccionado</p>
-                                    </div>
-                                    <small>Sólo vista previa local, no se envía al servidor.</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- PASO 3 -->
-                    <div class="wizard-step" id="wizard-step-3">
-                        <span class="paso-tag">PASO 03 DE 04</span>
-                        <h2>Datos de acceso</h2>
-                        <p class="step-subtitle">Crea tus credenciales para acceder a MecaGest.</p>
-
-                        <div class="form-grid-2">
-                            <div class="input-container full-width">
-                                <label>Nombre de usuario *</label>
-                                <div class="input-with-icon">
-                                    <i class="fa-solid fa-at"></i>
-                                    <input type="text" id="user" placeholder="marcoramirez" class="input-underline" required>
-                                </div>
-                                <span class="input-hint">Utiliza al menos 4 caracteres.</span>
-                            </div>
-                            <div class="input-container">
-                                <label>Contraseña *</label>
-                                <div class="input-with-icon">
-                                    <i class="fa-solid fa-lock"></i>
-                                    <input type="password" id="password" placeholder="••••••••" class="input-underline" required>
-                                </div>
-                            </div>
-                            <div class="input-container">
-                                <label>Confirmar contraseña *</label>
-                                <div class="input-with-icon">
-                                    <i class="fa-solid fa-lock"></i>
-                                    <input type="password" id="confirmarPassword" placeholder="••••••••" class="input-underline" required>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- PASO 4 -->
-                    <div class="wizard-step" id="wizard-step-4">
-                        <span class="paso-tag">PASO 04 DE 04</span>
-                        <h2>Datos de ubicación</h2>
-                        <p class="step-subtitle">Indica dónde podemos localizarte.</p>
-
-                        <div class="simulated-alert">
-                            ¡Registro revisado! Envío simulado: los datos no se almacenan.
-                        </div>
-
-                        <div class="form-grid-2">
-                            <div class="input-container full-width">
-                                <label>Dirección *</label>
-                                <div class="input-with-icon">
-                                    <i class="fa-solid fa-house"></i>
-                                    <input type="text" id="direccion" placeholder="Calle, número, colonia" class="input-underline" required>
-                                </div>
-                            </div>
-                            <div class="input-container">
-                                <label>País *</label>
-                                <div class="input-with-icon">
-                                    <i class="fa-solid fa-globe"></i>
-                                    <input type="text" id="pais" placeholder="México" class="input-underline" required>
-                                </div>
-                            </div>
-                            <div class="input-container">
-                                <label>Estado *</label>
-                                <div class="input-with-icon">
-                                    <i class="fa-solid fa-location-dot"></i>
-                                    <input type="text" id="estado" placeholder="Puebla" class="input-underline" required>
-                                </div>
-                            </div>
-                            <div class="input-container">
-                                <label>Ciudad *</label>
-                                <div class="input-with-icon">
-                                    <i class="fa-solid fa-city"></i>
-                                    <input type="text" id="ciudad" placeholder="Xicotepec" class="input-underline" required>
-                                </div>
-                            </div>
-                            <div class="input-container">
-                                <label>Código postal *</label>
-                                <div class="input-with-icon">
-                                    <i class="fa-solid fa-envelope-open-text"></i>
-                                    <input type="text" id="codigoPostal" placeholder="73080" class="input-underline" required>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="terms-check" style="margin-top: 15px;">
-                            <input type="checkbox" id="terms" required>
-                            <label for="terms">Acepto los términos y condiciones de uso de la plataforma <strong>MecaGest</strong>. *</label>
-                        </div>
-                    </div>
-
-                    <!-- BOTONES DE NAVEGACIÓN -->
-                    <div class="wizard-footer">
-                        <button type="button" class="btn-sec" id="btnAnterior" onclick="pasoAnterior()">← Anterior</button>
-                        <div class="footer-right">
-                            <button type="button" class="btn-flat" onclick="limpiarCampos()">Limpiar</button>
-                            <button type="button" class="btn-primary" id="btnSiguiente" onclick="pasoSiguiente()">Siguiente →</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-            <!-- LABORATORIO DE CONTROLES HTML5 (SECCIÓN INFERIOR) -->
-            <div class="lab-header">
-                <span class="lab-badge">02</span>
-                <div class="lab-title">
-                    <h3>Módulos de práctica</h3>
-                    <p>Estos controles son ejemplos académicos para futuras funcionalidades del sistema; no forman parte del registro de usuarios.</p>
-                </div>
-            </div>
-
-            <!-- SECCIÓN 05: CITAS -->
-            <div class="practice-card">
-                <span class="card-num">05</span>
-                <h4>Visualización de citas</h4>
-                <div class="citas-filter-row">
-                    <label>Filtrar citas por:</label>
-                    <input type="radio" name="filterCitas" checked> Mes
-                    <input type="radio" name="filterCitas"> Semana
-                    <input type="month" value="2026-10" class="input-inline">
-                    <button class="btn-dark">Ver citas</button>
-                </div>
-
-                <table class="table-custom">
-                    <thead>
-                        <tr>
-                            <th>NO.</th>
-                            <th>NOMBRE Y UNIDAD</th>
-                            <th>DESCRIPCIÓN</th>
-                            <th>FECHA PROGRAMADA</th>
-                            <th>ESTATUS ACTUAL</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Cita de entrega de unidad reparada con el cliente: Mauricio Mejía, Unidad: Volkswagen, Jetta 2020</td>
-                            <td>Se realizó un cambio de bujías, la unidad está lista para entrega.</td>
-                            <td>10 de octubre de 2026</td>
-                            <td><span class="badge status-green">Atendida</span></td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Cita de valoración con el cliente: Bertha Hdz Aranda, Unidad: Renault, Duster 2022</td>
-                            <td>El cliente solicita una revisión del cuerpo de aceleración para posible mantenimiento correctivo.</td>
-                            <td>16 de octubre de 2026</td>
-                            <td><span class="badge status-blue">Programada</span></td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Cita de valoración con el cliente: Mauricio Mejía, Unidad: Volkswagen, Jetta 2020</td>
-                            <td>A la unidad se le hicieron cambio de bujías, pero el cliente reporta un sonido extraño.</td>
-                            <td>17 de octubre de 2026</td>
-                            <td><span class="badge status-blue">Programada</span></td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Cita de valoración con la cliente: Alejandra Romero, Unidad: Toyota, Hilux 2012</td>
-                            <td>La cliente solicita una revisión del cuerpo de aceleración para posible mantenimiento correctivo.</td>
-                            <td>16 de octubre de 2026</td>
-                            <td><span class="badge status-red">Cancelada</span></td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>Cita de valoración con la cliente: Alejandra Romero, Unidad: Toyota, Hilux 2012</td>
-                            <td>El cliente solicita una revisión del cuerpo de aceleración de la unidad para posible mantenimiento correctivo.</td>
-                            <td>20 de octubre de 2026</td>
-                            <td><span class="badge status-yellow">Reprogramada</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- SECCIÓN 06 Y 07 -->
-            <div class="grid-2-cards">
-                <div class="practice-card">
-                    <span class="card-num">06</span>
-                    <h4>Configuración de la interfaz</h4>
-                    <p class="sub-text">Paleta MecaGest Desktop</p>
-                    <div class="color-pickers">
-                        <div>
-                            <label>Color de la fuente</label>
-                            <input type="color" value="#000000">
-                        </div>
-                        <div>
-                            <label>Color de fondo</label>
-                            <input type="color" value="#eef2f5">
-                        </div>
-                    </div>
-                    <div class="range-group">
-                        <label>Volumen de reproducción de sonidos</label>
-                        <input type="range" min="0" max="100" value="50">
+                        <table class="table-custom" id="tablaAlmacen">
+                            <thead>
+                                <tr>
+                                    <th>NO.</th>
+                                    <th>HERRAMIENTA</th>
+                                    <th>CATEGORÍA</th>
+                                    <th>CANTIDAD</th>
+                                    <th>UNIDAD</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1</td><td>Llave combinada</td><td>Herramienta manual</td><td class="col-cant">4</td><td>Piezas</td></tr>
+                                <tr><td>2</td><td>Llave dinamométrica</td><td>Herramienta especializada</td><td class="col-cant">2</td><td>Piezas</td></tr>
+                                <tr><td>3</td><td>Extractor de poleas</td><td>Herramienta especializada</td><td class="col-cant">1</td><td>Juego</td></tr>
+                                <tr><td>4</td><td>Llave Torx</td><td>Herramienta manual</td><td class="col-cant">3</td><td>Juegos</td></tr>
+                            </tbody>
+                            <tfoot>
+                                <tr style="background:#f1f5f9; font-weight:700;">
+                                    <td colspan="3">Total de unidades</td>
+                                    <td id="totalUnidades">10</td>
+                                    <td>—</td>
+                                </tr>
+                            </tfoot>
+                        </table>
                     </div>
                 </div>
-
-                <div class="practice-card">
-                    <span class="card-num">07</span>
-                    <h4>Configuración de mi cuenta</h4>
-                    <div class="profile-preview">
-                        <div class="avatar-circle">MG</div>
-                        <div>
-                            <strong>Perfil de MecaGest</strong>
-                            <p>Personalización de cuenta</p>
-                        </div>
-                    </div>
-                    <label>Foto de perfil</label>
-                    <input type="file">
-                    <button class="btn-orange">SIGUIENTE →</button>
-                </div>
-            </div>
-
-            <!-- SECCIÓN 08 Y 09 -->
-            <div class="grid-2-cards">
-                <div class="practice-card">
-                    <span class="card-num">08</span>
-                    <h4>Datos fiscales</h4>
-                    <label>Registro Federal de Contribuyentes (RFC)</label>
-                    <div class="input-with-icon">
-                        <i class="fa-regular fa-id-card"></i>
-                        <input type="text" placeholder="RAHMXXXXXXXXX" class="input-underline">
-                    </div>
-                    <label style="margin-top: 15px; display:block;">Constancia de situación fiscal</label>
-                    <input type="file">
-                </div>
-
-                <div class="practice-card">
-                    <span class="card-num">09</span>
-                    <h4>Solicitud de cita</h4>
-                    <label>Fecha y hora de la cita</label>
-                    <div class="input-with-icon">
-                        <i class="fa-regular fa-calendar-check"></i>
-                        <input type="datetime-local" class="input-underline">
-                    </div>
-                    <label style="margin-top: 15px; display:block;">Elige la sucursal</label>
-                    <div class="input-with-icon">
-                        <i class="fa-solid fa-location-dot"></i>
-                        <input type="text" placeholder="Busca tu sucursal preferida..." class="input-underline">
-                    </div>
-                    <label style="margin-top: 15px; display:block;">Descripción de la cita</label>
-                    <textarea placeholder="Describe brevemente el servicio que necesitas..." class="input-underline"></textarea>
-                </div>
-            </div>
-
-            <!-- SECCIÓN 10: REQUISICIÓN DE HERRAMIENTAS -->
-            <div class="practice-card">
-                <span class="card-num">10</span>
-                <h4>Solicitud de herramientas y refacciones</h4>
-                <div class="req-form-row">
-                    <div>
-                        <label>Categoría de recurso</label>
-                        <div>
-                            <input type="radio" name="catRecurso"> Refacción
-                            <input type="radio" name="catRecurso" checked> Herramienta
-                        </div>
-                    </div>
-                    <div class="flex-1">
-                        <label>Elige la pieza o herramienta</label>
-                        <select class="input-underline">
-                            <option value="">Selecciona un recurso</option>
-                            <optgroup label="Piezas de motor">
-                                <option>Bujía</option>
-                                <option>Filtro de aceite</option>
-                            </optgroup>
-                            <optgroup label="Piezas de transmisión">
-                                <option>Disco de embrague</option>
-                            </optgroup>
-                            <optgroup label="Llaves y herramientas especializadas">
-                                <option>Llave combinada</option>
-                                <option>Llave Torx</option>
-                                <option>Llave dinamométrica</option>
-                            </optgroup>
-                        </select>
-                    </div>
-                    <div>
-                        <label>Cantidad</label>
-                        <input type="number" value="1" min="1" class="input-underline" style="width: 60px;">
-                    </div>
-                    <div>
-                        <button class="btn-dark">Solicitar herramienta</button>
-                    </div>
-                </div>
-
-                <table class="table-custom" style="margin-top: 20px;">
-                    <thead>
-                        <tr>
-                            <th>NO.</th>
-                            <th>HERRAMIENTA</th>
-                            <th>CATEGORÍA</th>
-                            <th>CANTIDAD</th>
-                            <th>UNIDAD</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Llave combinada</td>
-                            <td>Herramienta manual</td>
-                            <td>4</td>
-                            <td>Piezas</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Llave dinamométrica</td>
-                            <td>Herramienta especializada</td>
-                            <td>2</td>
-                            <td>Piezas</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            </section>
 
         </main>
     </div>
 
+    <!-- Tu script original del wizard -->
     <script src="./js/app.js"></script>
+
+    <!-- Lógica para cambiar entre pestañas sin salir de esta hoja -->
+    <script>
+        const infoBanner = {
+            registro: {
+                titulo: 'Registro de usuarios',
+                desc: 'Alta de nuevos perfiles en la plataforma MecaGest Desktop.'
+            },
+            citas: {
+                titulo: 'Próximas citas',
+                desc: 'Consulta de citas de ejemplo y solicitud de una nueva cita. Información de demostración sin base de datos.'
+            },
+            configuracion: {
+                titulo: 'Configuración',
+                desc: 'Personalización de interfaz y cuenta. Los cambios permanentes se implementarán con PHP y MySQL.'
+            },
+            almacen: {
+                titulo: 'Salidas de almacén',
+                desc: 'Solicitud de herramientas y refacciones asociadas a órdenes de servicio: datos de práctica.'
+            }
+        };
+
+        function cambiarVista(vista, botonActivo) {
+            // Oculta todas las secciones
+            document.querySelectorAll('.vista-modulo').forEach(sec => sec.classList.remove('activa'));
+            // Muestra la seleccionada
+            document.getElementById('vista-' + vista).classList.add('activa');
+
+            // Actualiza botón activo en la barra
+            document.querySelectorAll('.nav-pill').forEach(btn => btn.classList.remove('active'));
+            botonActivo.classList.add('active');
+
+            // Actualiza textos del encabezado azul
+            document.getElementById('bannerTitulo').textContent = infoBanner[vista].titulo;
+            document.getElementById('bannerDesc').textContent = infoBanner[vista].desc;
+        }
+
+        // Funciones de Próximas Citas
+        function alternarFiltroCitas() {
+            const tipo = document.querySelector('input[name="filterCitas"]:checked').value;
+            document.getElementById('inputMes').disabled = (tipo !== 'mes');
+            document.getElementById('inputSemana').disabled = (tipo !== 'semana');
+        }
+        function filtrarTablaCitas() {
+            const tipo = document.querySelector('input[name="filterCitas"]:checked').value;
+            const valor = tipo === 'mes' ? document.getElementById('inputMes').value : document.getElementById('inputSemana').value;
+            alert(`Filtro aplicado por ${tipo}: ${valor || 'Sin fecha seleccionada'}`);
+        }
+
+        // Funciones de Configuración
+        function aplicarColores() {
+            document.body.style.color = document.getElementById('colorFuente').value;
+            document.body.style.backgroundColor = document.getElementById('colorFondo').value;
+        }
+        function actualizarVolumen(valor) {
+            document.getElementById('valorVolumen').textContent = valor + '%';
+        }
+        function silenciarSonidos() {
+            document.getElementById('rangoVolumen').value = 0;
+            actualizarVolumen(0);
+        }
+        function previsualizarAvatar(event) {
+            const archivo = event.target.files[0];
+            if (!archivo) return;
+            const lector = new FileReader();
+            lector.onload = function(e) {
+                document.getElementById('avatarPreview').innerHTML = `<img src="${e.target.result}" style="width:100%; height:100%; object-fit:cover;">`;
+            };
+            lector.readAsDataURL(archivo);
+        }
+
+        // Funciones de Almacén
+        function agregarRecurso() {
+            const recurso = document.getElementById('selectRecurso').value;
+            const cantidad = parseInt(document.getElementById('cantRecurso').value, 10);
+            const categoria = document.querySelector('input[name="catRecurso"]:checked').value;
+
+            if (!recurso) return alert('Por favor, selecciona una pieza o herramienta.');
+            if (isNaN(cantidad) || cantidad < 1) return alert('Ingresa una cantidad válida.');
+
+            const tbody = document.querySelector('#tablaAlmacen tbody');
+            const fila = document.createElement('tr');
+            fila.innerHTML = `<td>${tbody.rows.length + 1}</td><td>${recurso}</td><td>${categoria}</td><td class="col-cant">${cantidad}</td><td>Piezas</td>`;
+            tbody.appendChild(fila);
+
+            let suma = 0;
+            document.querySelectorAll('#tablaAlmacen tbody tr').forEach(tr => {
+                suma += parseInt(tr.querySelector('.col-cant').textContent, 10) || 0;
+            });
+            document.getElementById('totalUnidades').textContent = suma;
+            document.getElementById('contadorConceptos').textContent = `${tbody.rows.length} CONCEPTOS`;
+            document.getElementById('selectRecurso').value = '';
+            document.getElementById('cantRecurso').value = 1;
+        }
+    </script>
 </body>
 </html>

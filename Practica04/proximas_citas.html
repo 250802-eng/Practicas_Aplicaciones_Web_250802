@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MecaGest | Configuración</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="main-wrapper">
+        <main class="content-area">
+            <!-- ENCABEZADO AZUL -->
+            <header class="top-banner">
+                <div class="banner-info">
+                    <h1>Configuración</h1>
+                    <p>Personalización de interfaz y cuenta. Los cambios permanentes se implementarán con PHP y MySQL.</p>
+                    <div class="tech-badges">
+                        <span class="tech-badge">HTML5 semántico</span>
+                        <span class="tech-badge">CSS puro</span>
+                        <span class="tech-badge">JavaScript - Práctica 05</span>
+                    </div>
+                </div>
+                <div class="logo-box">
+                    <i class="fa-solid fa-van-shuttle"></i>
+                    <span>SGTM</span>
+                </div>
+            </header>
+
+            <!-- NAVEGACIÓN -->
+            <nav class="nav-bar">
+                <a href="RegistroUsuarios.html" class="nav-pill"><i class="fa-regular fa-user"></i> Registro de usuarios</a>
+                <a href="proximas_citas.html" class="nav-pill"><i class="fa-regular fa-calendar-check"></i> Próximas citas</a>
+                <a href="configuracion.html" class="nav-pill active"><i class="fa-solid fa-gear"></i> Configuración</a>
+                <a href="salidas_almacen.html" class="nav-pill"><i class="fa-solid fa-wrench"></i> Salidas de almacén</a>
+            </nav>
+
+            <!-- CONTENEDOR PRINCIPAL -->
+            <div class="wizard-card">
+                <div class="module-header">
+                    <div class="module-title-group">
+                        <span class="module-num">01</span>
+                        <div>
+                            <span class="paso-tag">MÓDULOS DE PRÁCTICA · MECAGEST</span>
+                            <h2>Configuración</h2>
+                            <p class="step-subtitle" style="margin-bottom:0;">Personalización de interfaz y cuenta. Los cambios permanentes se implementarán con PHP y MySQL.</p>
+                        </div>
+                    </div>
+                    <span class="paso-tag" style="color:#64748b;">HTML + CSS + JS</span>
+                </div>
+
+                <div class="grid-2-cards">
+                    <!-- TARJETA 06: CONFIGURACIÓN DE LA INTERFAZ -->
+                    <div class="config-card">
+                        <div class="config-card-header">
+                            <span class="card-num">06</span>
+                            <h4>Configuración de la interfaz</h4>
+                        </div>
+
+                        <!-- PALETA -->
+                        <div class="config-box">
+                            <div class="palette-swatches">
+                                <span class="swatch" style="background:#0f3a6d;"></span>
+                                <span class="swatch" style="background:#1d5ca8;"></span>
+                                <span class="swatch" style="background:#d9531e;"></span>
+                                <span class="swatch" style="background:#64748b;"></span>
+                            </div>
+                            <strong style="font-size:0.85rem; display:block;">Paleta MecaGest Desktop</strong>
+                            <span class="helper-note" style="margin-top:2px;">Azul institucional · Naranja de acento</span>
+                        </div>
+
+                        <!-- COLOR FUENTE -->
+                        <div class="config-box config-inline-row">
+                            <label class="field-label" for="colorFuente">Color de la fuente</label>
+                            <div class="color-picker-wrap">
+                                <input type="color" id="colorFuente" value="#1e293b" oninput="aplicarColores()">
+                            </div>
+                        </div>
+
+                        <!-- COLOR FONDO -->
+                        <div class="config-box config-inline-row">
+                            <label class="field-label" for="colorFondo">Color de fondo</label>
+                            <div class="color-picker-wrap">
+                                <input type="color" id="colorFondo" value="#eef2f6" oninput="aplicarColores()">
+                            </div>
+                        </div>
+
+                        <!-- VOLUMEN -->
+                        <div class="config-box">
+                            <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+                                <label class="field-label" for="rangoVolumen">Volumen de reproducción de sonidos</label>
+                                <span id="valorVolumen" style="font-size:0.8rem; font-weight:700; color:#1d5ca8;">50%</span>
+                            </div>
+                            <input type="range" id="rangoVolumen" min="0" max="100" value="50" style="width:100%;" oninput="actualizarVolumen(this.value)">
+                            <div class="range-ticks">
+                                <span>0%</span>
+                                <span>50%</span>
+                                <span>100%</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <button type="button" class="btn-sec" onclick="silenciarSonidos()">
+                                <i class="fa-solid fa-volume-xmark"></i> Silenciar sonidos
+                            </button>
+                            <span class="helper-note">La selección de colores y el volumen alteran la vista previa en tiempo real.</span>
+                        </div>
+                    </div>
+
+                    <!-- TARJETA 07: CONFIGURACIÓN DE MI CUENTA -->
+                    <div class="config-card">
+                        <div class="config-card-header">
+                            <span class="card-num">07</span>
+                            <h4>Configuración de mi cuenta</h4>
+                        </div>
+
+                        <!-- PERFIL -->
+                        <div class="config-box" style="display:flex; align-items:center; gap:15px;">
+                            <div id="avatarPreview" class="avatar-circle">MG</div>
+                            <div>
+                                <strong style="font-size:0.95rem; display:block;">Perfil de MecaGest</strong>
+                                <span style="font-size:0.8rem; color:#64748b;">Personalización de cuenta</span>
+                            </div>
+                        </div>
+
+                        <!-- FOTO DE PERFIL -->
+                        <div class="config-box">
+                            <label class="field-label" for="fotoPerfilInput">Foto de perfil</label>
+                            <input type="file" id="fotoPerfilInput" class="file-input-custom" accept="image/*" onchange="previsualizarAvatar(event)">
+                            <span class="helper-note">Formatos de imagen admitidos por el navegador.</span>
+                        </div>
+
+                        <!-- BOTÓN GRÁFICO -->
+                        <div class="config-box">
+                            <div style="display:flex; justify-content:space-between; align-items:center;">
+                                <span class="field-label">Botón gráfico</span>
+                                <span class="code-tag">input: image</span>
+                            </div>
+                            <button type="button" class="btn-orange-wide" onclick="alert('Avanzando a la siguiente sección de perfil...')">
+                                SIGUIENTE →
+                            </button>
+                            <span class="helper-note">Control visual; el envío gráfico se conectará en clases posteriores.</span>
+                        </div>
+
+                        <!-- CAMPO OCULTO Y BOTÓN GUARDAR -->
+                        <div class="config-box">
+                            <input type="hidden" name="usuario_id" value="1">
+                            <span class="helper-note" style="margin-top:0; margin-bottom:12px;">
+                                <span class="code-tag">input: hidden</span> — Identificador de ejemplo presente en el código HTML, pero no visible en pantalla.
+                            </span>
+
+                            <div style="display:flex; justify-content:space-between; align-items:center;">
+                                <span class="field-label">Botón de envío</span>
+                                <span class="code-tag">input: submit</span>
+                            </div>
+                            <button type="submit" class="btn-demo-disabled" disabled>Guardar (demostración)</button>
+                            <span class="helper-note">Deshabilitado hasta conectar persistencia mediante PHP.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function aplicarColores() {
+            document.body.style.color = document.getElementById('colorFuente').value;
+            document.body.style.backgroundColor = document.getElementById('colorFondo').value;
+        }
+
+        function actualizarVolumen(valor) {
+            document.getElementById('valorVolumen').textContent = valor + '%';
+        }
+
+        function silenciarSonidos() {
+            document.getElementById('rangoVolumen').value = 0;
+            actualizarVolumen(0);
+        }
+
+        function previsualizarAvatar(event) {
+            const archivo = event.target.files[0];
+            if (!archivo) return;
+            const lector = new FileReader();
+            lector.onload = function(e) {
+                const avatar = document.getElementById('avatarPreview');
+                avatar.innerHTML = `<img src="${e.target.result}" style="width:100%; height:100%; object-fit:cover;">`;
+            };
+            lector.readAsDataURL(archivo);
+        }
+    </script>
+</body>
+</html>
